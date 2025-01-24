@@ -1,0 +1,182 @@
+using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
+
+
+public class AudioManager : MonoBehaviour
+{
+    public static AudioManager instance;
+    public AudioSource audioSource;
+    
+    // Audio Clips to be shuffled through script
+    public AudioClip buttonClick;
+    public AudioClip levelEnd;
+    public AudioClip lavaBurn;
+    public AudioClip jump;
+    public AudioClip rampJump;
+
+    [Tooltip("Shows how many levels are completed")]
+    public int levelNumber = 0;
+
+    [Tooltip("Buttons for all the levels in the Game")]
+    public Button[] levelButtons;
+
+    public string menuSceneName = "Menu"; 
+
+    private void Awake()
+    {
+        //We check if the instance is null i.e we freshly started the game
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject); // GameObject persist when scene changes
+            SceneManager.sceneLoaded += OnSceneLoaded; // Register an event named OnSceneLoaded
+            // in SceneManager.sceneLoaded library
+        }
+        else
+        {
+            // If the gameObject has persisted from scene to scene, i.e instance already exist
+            Destroy(gameObject);
+        }
+    }
+
+    private void Start()
+    {
+        QualitySettings.SetQualityLevel(5);
+
+        /// Not sure why but works with UnityEngine.Object only
+        Button[] buttons = UnityEngine.Object.FindObjectsByType<Button>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
+        foreach (Button button in buttons)
+        {
+            button.onClick.AddListener(PlayButtonClickAudio);
+        }
+
+        if (SceneManager.GetActiveScene().name == menuSceneName)
+        {
+            AssignLevelButtons();
+            UpdateLevelButtons();
+        }
+    }
+    // Def for the loaded event 
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == menuSceneName)
+        {
+            AssignLevelButtons();
+            UpdateLevelButtons();
+        }
+    }
+
+    private void AssignLevelButtons()
+    { // Find all buttons in the scene, including inactive ones
+      Button[] allButtons = Resources.FindObjectsOfTypeAll<Button>(); 
+        
+        // Reset the levelButtons array i.e to null (To specify the length)
+        levelButtons = new Button[10]; 
+        
+        // Assign buttons based on their names
+        
+        for (int i = 0; i < levelButtons.Length; i++) 
+        { 
+            string buttonName = "Level " + (i + 1); 
+            foreach (Button button in allButtons) 
+            { 
+                if (button.name == buttonName) 
+                { 
+                    levelButtons[i] = button; break; 
+                } 
+            } 
+            
+            if (levelButtons[i] == null) 
+            { 
+                Debug.LogError("Button " + buttonName + " not found."); 
+            } 
+        } 
+    }
+
+    private void UpdateLevelButtons()
+    {
+        // Disable all level buttons
+        for (int i = 0; i < levelButtons.Length; i++)
+        {
+            if (levelButtons[i] != null)
+            {
+                levelButtons[i].interactable = false;
+            }
+            else
+            {
+                Debug.LogError("Button #" + (i + 1) + " not found.");
+            }
+        }
+
+        // Enable buttons only for the unlocked levels
+        for (int i = 0; i < levelNumber + 1; i++)
+        {
+            if (levelButtons[i] != null)
+            {
+                levelButtons[i].interactable = true;
+            }
+            else
+            {
+                Debug.LogError("Button #" + (i + 1) + " not found.");
+            }
+        }
+    }
+    // Called from the powerupAnimation script when player completes the level
+    public void InkLevelNumber(string scene)
+    {
+        
+        levelNumber = SceneManager.GetSceneByName(scene).buildIndex;
+
+        if (SceneManager.GetActiveScene().name == menuSceneName)
+        {
+            UpdateLevelButtons();
+        }
+    }
+
+    // Play different audios
+    void PlayButtonClickAudio()
+    {
+        if (audioSource != null && buttonClick != null)
+        {
+            audioSource.clip = buttonClick;
+            audioSource.PlayOneShot(buttonClick);        }
+    }
+
+    public void PlayLevelEndAudio()
+    {
+        if (audioSource != null && levelEnd != null)
+        {
+            audioSource.clip = levelEnd;
+            audioSource.PlayOneShot(levelEnd);        }
+    }
+
+    public void PlayLavaBurnAudio()
+    {
+        if (audioSource != null && lavaBurn != null)
+        {
+            audioSource.clip = lavaBurn;
+            audioSource.PlayOneShot(lavaBurn);        }
+    }
+
+    public void PlayJumpAudio()
+    {
+        audioSource.clip = jump;
+        audioSource.PlayOneShot(jump);    }
+
+    public void PlayRampJumpAudio()
+    {
+        audioSource.clip = rampJump;
+        audioSource.PlayOneShot(rampJump);    
+    }
+
+    // Destroy the registered event in sceneLoaded
+    private void OnDestroy()
+    {
+        if (instance == this)
+        {
+            SceneManager.sceneLoaded -= OnSceneLoaded;
+        }
+    }
+}

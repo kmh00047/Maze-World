@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: e64b62ab6c9c9024fb88039858b97ffd
+timeCreated: 1523537425
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 117049
+  packageName: Free Asset - 2D Handcrafted Art
+  packageVersion: 1.0
+  assetPath: Assets/Free Asset - 2D Handcrafted Art/Prefab/Ripple.prefab
+  uploadId: 244939

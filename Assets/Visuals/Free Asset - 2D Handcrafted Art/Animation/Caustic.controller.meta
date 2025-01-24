@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 1f4e94f8dafaaf741951c73878463057
+timeCreated: 1523457678
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 9100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 117049
+  packageName: Free Asset - 2D Handcrafted Art
+  packageVersion: 1.0
+  assetPath: Assets/Free Asset - 2D Handcrafted Art/Animation/Caustic.controller
+  uploadId: 244939
