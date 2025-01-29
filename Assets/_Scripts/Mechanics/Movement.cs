@@ -61,6 +61,8 @@ public class Movement : MonoBehaviour
         {
             rb.linearVelocityY = 0;
             rb.AddForceY(jumpForce * 10);
+            if(AudioManager.instance != null)
+            AudioManager.instance.PlayJumpAudio();
             animator.Play("Scale Up");
             isJumping = false;
         }

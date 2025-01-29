@@ -12,7 +12,6 @@ public class Settings : MonoBehaviour
     public AudioMixer audioMixer; 
     public Slider masterVolumeSlider; 
     public Slider musicVolumeSlider; 
-    public Toggle fullscreenToggle;
 
     Resolution[] resolutions;
     void Start()
@@ -45,12 +44,12 @@ public class Settings : MonoBehaviour
         // Initialize sliders and toggle with current settings
         masterVolumeSlider.value = PlayerPrefs.GetFloat("MasterVolume", 0.75f); 
         musicVolumeSlider.value = PlayerPrefs.GetFloat("MusicVolume", 0.75f); 
-        fullscreenToggle.isOn = Screen.fullScreen; 
+        //fullscreenToggle.isOn = Screen.fullScreen; 
         
         // Apply saved settings (from sliders and toggle)
         SetMasterVolume(masterVolumeSlider.value); 
         SetMusicVolume(musicVolumeSlider.value); 
-        SetFullscreen(fullscreenToggle.isOn);
+        //SetFullscreen(fullscreenToggle.isOn);
     }
 
     // Def for the setResolution method

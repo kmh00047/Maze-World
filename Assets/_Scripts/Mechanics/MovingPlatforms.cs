@@ -7,6 +7,8 @@ public class MovingPlatforms : MonoBehaviour
     public GameObject gamePlayMenu;
     [Tooltip("Drag and drop the PlayerPrefab here from the project assets")]
     public GameObject PlayerPrefab;
+    [Tooltip("Drag and drop the texture of the Player here")]
+    public GameObject PlayerText;
 
     [Tooltip("Tick for vertical movement, else horizontal")]
     public bool isMovingVertical = false;
@@ -50,6 +52,7 @@ public class MovingPlatforms : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             player = collision.gameObject;
+            PlayerText.SetActive(false);
             newBall = Instantiate(PlayerPrefab, player.transform.position, player.transform.rotation);
 
             player.transform.SetParent(transform);
@@ -67,6 +70,7 @@ public class MovingPlatforms : MonoBehaviour
                 Destroy(newBall);
                 Debug.Log("Destroyed the new ball");
             }
+            PlayerText.SetActive(true);
             collision.gameObject.transform.SetParent(gamePlayMenu.transform);
             Debug.Log("Player exited the platform.");
         }

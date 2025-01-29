@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class AudioManager : MonoBehaviour
 {
-    public static AudioManager instance;
+    public static AudioManager instance { get; private set; }
     public AudioSource audioSource;
     
     // Audio Clips to be shuffled through script
@@ -43,7 +43,7 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
-        QualitySettings.SetQualityLevel(5);
+        //QualitySettings.SetQualityLevel(5);
 
         /// Not sure why but works with UnityEngine.Object only
         Button[] buttons = UnityEngine.Object.FindObjectsByType<Button>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
@@ -170,7 +170,6 @@ public class AudioManager : MonoBehaviour
         audioSource.clip = rampJump;
         audioSource.PlayOneShot(rampJump);    
     }
-
     // Destroy the registered event in sceneLoaded
     private void OnDestroy()
     {
@@ -178,5 +177,15 @@ public class AudioManager : MonoBehaviour
         {
             SceneManager.sceneLoaded -= OnSceneLoaded;
         }
+    }
+
+    /// <summary>
+    /// For debugging purpose only
+    /// </summary>
+    void OnGUI()
+    {
+        // Calculate frames per second
+        float fps = 1.0f / Time.deltaTime;
+        GUI.Label(new Rect(10, 10, 200, 20), "FPS: " + fps.ToString("F2"));
     }
 }
