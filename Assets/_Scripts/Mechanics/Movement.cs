@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Movement : MonoBehaviour
 {
@@ -7,77 +8,83 @@ public class Movement : MonoBehaviour
     [Tooltip("Max velocity of the player")]
     public float maxSpeed = 8f;
     [Tooltip("How fast the player should stop")]
-    public float decelaration = 3f;
+    public float deceleration = 3f;
     [Tooltip("Zoom of the camera on Player")]
     public float cameraDistance = 10f;
     [Tooltip("Upward force applied for jump")]
     public float jumpForce = 35f;
 
     [Space]
-    [Space]
-
     public Animator animator;
     public LayerMask groundMask;
-    //public LayerMask wallMask;
 
-    private bool isMovingRight;
-    private bool isMovingLeft;
-    private bool isJumping;
     private Rigidbody2D rb;
     private bool isGrounded = true;
-    //private bool isTouchingWall = false;
-    private void Start()
+    private Vector2 moveInput;
+    private InputSystem_Actions inputActions;
+
+    private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        inputActions = new InputSystem_Actions();
+    }
+
+    private void OnEnable()
+    {
+        inputActions.Player.Enable();
+        inputActions.Player.Move.performed += OnMove;
+        inputActions.Player.Move.canceled += OnMove;
+        inputActions.Player.Jump.performed += OnJump;
+        inputActions.Player.Jump.canceled += OnJumpRelease;
+    }
+
+    private void OnDisable()
+    {
+        inputActions.Player.Move.performed -= OnMove;
+        inputActions.Player.Move.canceled -= OnMove;
+        inputActions.Player.Jump.performed -= OnJump;
+        inputActions.Player.Jump.canceled -= OnJumpRelease;
+        inputActions.Player.Disable();
+    }
+
+    private void OnMove(InputAction.CallbackContext context)
+    {
+        moveInput = context.ReadValue<Vector2>();
+    }
+
+    private void OnJump(InputAction.CallbackContext context)
+    {
+        if (isGrounded)
+        {
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0);
+            rb.AddForce(Vector2.up * jumpForce * 0.2f, ForceMode2D.Impulse);
+            if (AudioManager.instance != null)
+                AudioManager.instance.PlayJumpAudio();
+            animator.Play("Scale Up");
+        }
+    }
+
+    private void OnJumpRelease(InputAction.CallbackContext context)
+    {
+        animator.Play("Scale Down");
     }
 
     private void Update()
     {
-        // Horizontal Movement
-        if(isMovingRight)
+        float moveDirection = moveInput.x;
+
+        if (moveDirection != 0)
         {
-            rb.AddForceX(speed * 100 * Time.deltaTime);
+            rb.AddForce(new Vector2(moveDirection * speed * 120 * Time.deltaTime, 0));
         }
 
-        else if (isMovingLeft)
+        // Deceleration
+        if (moveDirection == 0 && isGrounded)
         {
-            rb.AddForceX(-speed * 100 * Time.deltaTime);
-        }
-
-        // Snap changing direction
-        if (isMovingRight && (rb.linearVelocityX < 0))
-        {
-            rb.AddForceX(speed * 100 * Time.deltaTime);
-        }
-
-        else if (isMovingLeft && (rb.linearVelocityX > 0))
-        {
-            rb.AddForceX(-speed * 100 * Time.deltaTime);
-        }
-
-        // Jumping 
-
-        if(isJumping && isGrounded)
-        {
-            rb.linearVelocityY = 0;
-            rb.AddForceY(jumpForce * 10);
-            if(AudioManager.instance != null)
-            AudioManager.instance.PlayJumpAudio();
-            animator.Play("Scale Up");
-            isJumping = false;
-        }
-
-        
-
-        // Deceleration 
-        if ((!isMovingLeft) && (!isMovingRight) && (isGrounded))
-        {
-            if (rb.linearVelocityX < -(maxSpeed/7))
-                rb.linearVelocityX += decelaration * Time.deltaTime;
-            else if (rb.linearVelocityX > (maxSpeed/7))
-            {
-                rb.linearVelocityX -= decelaration * Time.deltaTime;
-            }
+            if (rb.linearVelocity.x < -(maxSpeed / 7))
+                rb.linearVelocity += new Vector2(deceleration * Time.deltaTime, 0);
+            else if (rb.linearVelocity.x > (maxSpeed / 7))
+                rb.linearVelocity -= new Vector2(deceleration * Time.deltaTime, 0);
         }
     }
 
@@ -85,61 +92,24 @@ public class Movement : MonoBehaviour
     {
         Camera.main.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z - cameraDistance);
     }
+
     private void FixedUpdate()
     {
-        if (rb.linearVelocityX >= maxSpeed) 
+        if (rb.linearVelocity.x >= maxSpeed)
         {
-            rb.linearVelocityX = maxSpeed;
+            rb.linearVelocity = new Vector2(maxSpeed, rb.linearVelocity.y);
         }
-        else if(rb.linearVelocityX <= -maxSpeed)
+        else if (rb.linearVelocity.x <= -maxSpeed)
         {
-            rb.linearVelocityX = -maxSpeed;
+            rb.linearVelocity = new Vector2(-maxSpeed, rb.linearVelocity.y);
         }
     }
 
-    // Inputs
-
-    public void OnLeftButtonDown()
-    {
-        isMovingLeft = true;
-    }
-
-    public void OnRightButtonDown()
-    {
-        isMovingRight = true;
-    }
-
-    public void OnLeftButtonUp()
-    {
-        isMovingLeft = false;
-    }
-
-    public void OnRightButtonUp()
-    {
-        isMovingRight = false;
-    }
-
-    /// Jumping
-    public void OnJumpButtonPressed()
-    {
-        if(isGrounded)
-        { isJumping = true; }
-    }
-
-    public void OnJumpButtonUp()
-    {
-        //animator.StopPlayback();
-        animator.Play("Scale Down");
-        //isJumping = false;
-    }
-
-    // Collision Checking
     private void OnCollisionStay2D(Collision2D collision)
     {
         if ((groundMask.value & (1 << collision.gameObject.layer)) > 0)
         {
             isGrounded = true;
-            ///Debug.Log("Player is On the ground.");
         }
     }
     private void OnCollisionExit2D(Collision2D collision)
@@ -147,8 +117,6 @@ public class Movement : MonoBehaviour
         if ((groundMask.value & (1 << collision.gameObject.layer)) > 0)
         {
             isGrounded = false;
-            ///Debug.Log("Player is in Hawwaaaa.");
         }
     }
-
 }

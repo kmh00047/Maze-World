@@ -616,7 +616,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &83825525
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6661,7 +6661,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1078554924
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7982,7 +7982,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1429890550
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8589,7 +8589,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1557184659
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9616,7 +9616,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 3.5
   maxSpeed: 3.5
-  decelaration: 0.3
+  deceleration: 3
   cameraDistance: 7
   jumpForce: 34
   animator: {fileID: 1627486885}
