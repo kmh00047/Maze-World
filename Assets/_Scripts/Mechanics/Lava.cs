@@ -16,7 +16,9 @@ public class Lava : MonoBehaviour
         if(collision.gameObject.name == "Player")
         {
             Debug.Log("Player burnt in Lava");
+            if(audioManager != null) 
             audioManager.PlayLavaBurnAudio();
+
             Scene scene = SceneManager.GetActiveScene();
             SceneManager.LoadScene(scene.name);
         }

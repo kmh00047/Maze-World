@@ -126,8 +126,10 @@ public class AudioManager : MonoBehaviour
     // Called from the powerupAnimation script when player completes the level
     public void InkLevelNumber(string scene)
     {
-        
-        levelNumber = SceneManager.GetSceneByName(scene).buildIndex;
+        if (levelNumber < SceneManager.GetSceneByName(scene).buildIndex)
+        {
+            levelNumber = SceneManager.GetSceneByName(scene).buildIndex;
+        }
 
         if (SceneManager.GetActiveScene().name == menuSceneName)
         {
