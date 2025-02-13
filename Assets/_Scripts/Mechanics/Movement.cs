@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static Shop;
 
 public class Movement : MonoBehaviour
 {
@@ -61,6 +62,9 @@ public class Movement : MonoBehaviour
             if (AudioManager.instance != null)
                 AudioManager.instance.PlayJumpAudio();
             animator.Play("Scale Up");
+
+            Shop.instance.SetSkin(BallSkins.Ball3);
+            Shop.instance.ApplySkin(gameObject);
         }
     }
 
@@ -69,6 +73,10 @@ public class Movement : MonoBehaviour
         animator.Play("Scale Down");
     }
 
+    private void Start()
+    {
+        Shop.instance.ApplySkin(gameObject);
+    }
     private void Update()
     {
         float moveDirection = moveInput.x;
@@ -119,4 +127,5 @@ public class Movement : MonoBehaviour
             isGrounded = false;
         }
     }
+
 }

@@ -8,7 +8,7 @@ public class AudioManager : MonoBehaviour
 {
     public static AudioManager instance { get; private set; }
     public AudioSource audioSource;
-    
+
     // Audio Clips to be shuffled through script
     public AudioClip buttonClick;
     public AudioClip levelEnd;
@@ -17,12 +17,14 @@ public class AudioManager : MonoBehaviour
     public AudioClip rampJump;
 
     [Tooltip("Shows how many levels are completed")]
-    public int levelNumber = 0;
+    public static int levelNumber = 0;
 
     [Tooltip("Buttons for all the levels in the Game")]
     public Button[] levelButtons;
 
     public string menuSceneName = "Menu"; 
+
+    public static int coinCount = 0;
 
     private void Awake()
     {
@@ -45,6 +47,7 @@ public class AudioManager : MonoBehaviour
     {
         //QualitySettings.SetQualityLevel(5);
 
+        LoadData();        
         /// Not sure why but works with UnityEngine.Object only
         Button[] buttons = UnityEngine.Object.FindObjectsByType<Button>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
         foreach (Button button in buttons)
@@ -181,13 +184,41 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// For debugging purpose only
-    /// </summary>
+    // <summary>
+    // Save and Load System with Debugging
+    // </summary>
     void OnGUI()
     {
-        // Calculate frames per second
+        // Calculate FPS
         float fps = 1.0f / Time.deltaTime;
         GUI.Label(new Rect(10, 10, 200, 20), "FPS: " + fps.ToString("F2"));
+    }
+
+    public void SaveGame()
+    {
+        Player player = new Player();
+
+        if (player == null)
+        {
+            Debug.LogError("Player instance not created properly!");
+            return;
+        }
+
+        SaveSystem.SavePlayer(player);
+        Debug.Log("Game Saved Successfully.");
+    }
+
+
+    private void LoadData()
+    {
+        PlayerData data = SaveSystem.LoadPlayer();
+        if (data == null) 
+        {
+            Debug.LogWarning("Data not loaded Properly!");
+            return; 
+        }
+
+        levelNumber = data.Level;
+        coinCount = data.Coins;
     }
 }

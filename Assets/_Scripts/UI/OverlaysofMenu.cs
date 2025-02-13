@@ -25,6 +25,9 @@ public class OverlaysofMenu : MonoBehaviour
         quitMenu.SetActive(false);
         optionsMenu.SetActive(false);
         creditsMenu.SetActive(false);
+
+        // For debugging only
+        AudioManager.coinCount++;
     }
 
     public void optionsButtonPressed()
@@ -35,6 +38,9 @@ public class OverlaysofMenu : MonoBehaviour
         mainMenu.SetActive(false);
         levelMenu.SetActive(false);
         creditsMenu.SetActive(false);
+
+        // For debugging only
+        AudioManager.coinCount--;
     }
 
     public void creditsButtonPressed()
