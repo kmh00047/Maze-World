@@ -4,7 +4,8 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 public static class SaveSystem
 {
-    
+    #region Save System Logic | Universal
+
     public static void SavePlayer(Player player)
     {
         BinaryFormatter formatter = new BinaryFormatter();
@@ -47,4 +48,6 @@ public static class SaveSystem
             return null;
         }
     }
+    #endregion
+
 }

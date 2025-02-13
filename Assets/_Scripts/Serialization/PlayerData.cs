@@ -1,17 +1,22 @@
-using UnityEngine;
-using static Shop;
-
 [System.Serializable]
 public class PlayerData
 {
     public int Level;
     public int Coins;
-    public BallSkins SelectedSkin; // Store selected skin
+    public Shop.BallSkins SelectedSkin;
+    public Shop.Themes SelectedTheme;
+
+    public bool[] UnlockedSkins;
+    public bool[] UnlockedThemes;
 
     public PlayerData(Player player)
     {
         Level = player.Level;
         Coins = player.Coins;
-        SelectedSkin = player.SelectedSkin; // Get selected skin from Player
+        SelectedSkin = player.SelectedSkin;
+        SelectedTheme = player.SelectedTheme;
+
+        UnlockedSkins = player.UnlockedSkins;
+        UnlockedThemes = player.UnlockedThemes;
     }
 }

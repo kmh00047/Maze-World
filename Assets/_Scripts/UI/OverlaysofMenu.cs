@@ -1,79 +1,45 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-public class OverlaysofMenu : MonoBehaviour
+public class MenuController : MonoBehaviour
 {
-    /// <summary>
-    /// Controlling different menus by booleans
-    /// </summary>
-    /// Could do it with Enumerators but I am lazy (hehe :)
-    public GameObject quitMenu, optionsMenu, mainMenu, levelMenu, creditsMenu;
+    public enum MenuState { Main, Level, Options, Credits, Shop, Quit }
+
+    [Header("Menu Screens")]
+    public GameObject mainMenu;
+    public GameObject levelMenu;
+    public GameObject optionsMenu;
+    public GameObject creditsMenu;
+    public GameObject shopMenu;
+    public GameObject quitMenu;
 
     private void Start()
     {
-        mainMenu.SetActive(true);
-        quitMenu.SetActive(false);
-        optionsMenu.SetActive(false);
-        levelMenu.SetActive(false);
-        creditsMenu.SetActive(false);
-    }
-    public void startButtonPressed()
-    {
-        Debug.Log("Going to Level Menu.");
-        levelMenu.SetActive(true);
-        mainMenu.SetActive(false);
-        quitMenu.SetActive(false);
-        optionsMenu.SetActive(false);
-        creditsMenu.SetActive(false);
-
-        // For debugging only
-        AudioManager.coinCount++;
+        SetMenu(MenuState.Main);
     }
 
-    public void optionsButtonPressed()
+    public void SetMenu(MenuState state)
     {
-        Debug.Log("Options Button Pressed...");
-        optionsMenu.SetActive(true);
-        quitMenu.SetActive(false);
-        mainMenu.SetActive(false);
-        levelMenu.SetActive(false);
-        creditsMenu.SetActive(false);
+        mainMenu.SetActive(state == MenuState.Main);
+        levelMenu.SetActive(state == MenuState.Level);
+        optionsMenu.SetActive(state == MenuState.Options);
+        creditsMenu.SetActive(state == MenuState.Credits);
+        shopMenu.SetActive(state == MenuState.Shop);
+        quitMenu.SetActive(state == MenuState.Quit);
 
-        // For debugging only
-        AudioManager.coinCount--;
+        Debug.Log($"Menu switched to: {state}");
     }
 
-    public void creditsButtonPressed()
-    {
-        mainMenu.SetActive(false);
-        creditsMenu.SetActive(true) ;
-        optionsMenu.SetActive(false);
-        levelMenu.SetActive(false);
-        quitMenu .SetActive(false);
-    }
+    // Button Methods
+    public void StartGame() => SetMenu(MenuState.Level);
+    public void OpenOptions() => SetMenu(MenuState.Options);
+    public void OpenCredits() => SetMenu(MenuState.Credits);
+    public void OpenShop() => SetMenu(MenuState.Shop);
+    public void OpenQuitMenu() => SetMenu(MenuState.Quit);
+    public void BackToMain() => SetMenu(MenuState.Main);
 
-    public void quitButtonPressed()
+    public void QuitGame()
     {
-        mainMenu.SetActive(false);
-        optionsMenu.SetActive(false);
-        quitMenu.SetActive(true);
-        creditsMenu .SetActive(false) ;
-        levelMenu .SetActive(false);
-    }
-
-    public void BackButtonPressed()
-    {
-        Debug.Log("Going back to main menu...");
-        optionsMenu.SetActive(false);
-        quitMenu.SetActive(false);
-        mainMenu.SetActive(true);
-        levelMenu.SetActive(false);
-        creditsMenu.SetActive(false);
-    }
-
-    public void quitGame()
-    {
-        Debug.Log("Application Quiting...");
+        Debug.Log("Application Quitting...");
         Application.Quit();
     }
 }

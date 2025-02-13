@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using static Shop;
 
 public class Movement : MonoBehaviour
 {
@@ -63,8 +62,6 @@ public class Movement : MonoBehaviour
                 AudioManager.instance.PlayJumpAudio();
             animator.Play("Scale Up");
 
-            Shop.instance.SetSkin(BallSkins.Ball3);
-            Shop.instance.ApplySkin(gameObject);
         }
     }
 
@@ -75,6 +72,7 @@ public class Movement : MonoBehaviour
 
     private void Start()
     {
+        if(Shop.instance != null)
         Shop.instance.ApplySkin(gameObject);
     }
     private void Update()

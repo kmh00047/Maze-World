@@ -1,39 +1,30 @@
 using UnityEngine;
 
-
-public class OverlaysofLevels : MonoBehaviour
+public class LevelMenuController : MonoBehaviour
 {
+    public enum GameState { Gameplay, Paused, GameOver }
 
-    public GameObject gamePlay, gamePlayUI, pauseMenu;
+    [Header("Game Screens")]
+    public GameObject gamePlay;
+    public GameObject gamePlayUI;
+    public GameObject pauseMenu;
 
     private void Start()
     {
-        gamePlay.SetActive(true);
-        gamePlayUI.SetActive(true);
-        pauseMenu.SetActive(false);
+        SetGameState(GameState.Gameplay);
     }
 
-    public void OnBackButtonPressed()
+    public void SetGameState(GameState state)
     {
-            bool isGameplayActive = gamePlay.activeSelf;
-            gamePlay.SetActive(!isGameplayActive);
-            gamePlayUI.SetActive(!isGameplayActive);
-            pauseMenu.SetActive(isGameplayActive);
+        gamePlay.SetActive(state == GameState.Gameplay);
+        gamePlayUI.SetActive(state == GameState.Gameplay);
+        pauseMenu.SetActive(state == GameState.Paused);
+
+        Debug.Log($"Game state switched to: {state}");
     }
 
-    public void goToGamePlay()
-    {
-       gamePlay.SetActive (true);
-        gamePlayUI.SetActive(true);
-        pauseMenu.SetActive (false);
-    }
-
-    public void goToGameOver()
-    {
-        pauseMenu.SetActive(true) ;
-        gamePlayUI.SetActive (false) ;
-        gamePlay.SetActive(false) ;
-    }
+    // Button Methods
+    public void ResumeGame() => SetGameState(GameState.Gameplay);
+    public void PauseGame() => SetGameState(GameState.Paused);
+    public void ShowGameOverScreen() => SetGameState(GameState.GameOver);
 }
-
-    
