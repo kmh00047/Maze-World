@@ -12,7 +12,7 @@ public class Shop : MonoBehaviour
 
     [SerializeField] private List<GameObject> skins = new List<GameObject>();
     private Dictionary<BallSkins, GameObject> skinPrefabs;
-    private BallSkins selectedSkin = BallSkins.Ball1; // Default
+    public BallSkins selectedSkin = BallSkins.Ball1; // Default
 
     [SerializeField] private List<ThemeData> themeDatas = new List<ThemeData>();
     private Dictionary<Themes, ThemeData> themes;
@@ -186,9 +186,41 @@ public class Shop : MonoBehaviour
         {
             ThemeData theme = themes[selectedTheme];
 
-            if (backgroundImage != null)
-                backgroundImage.sprite = theme.backgroundImage;
+            // Changing color of the image
+            string colorString = "";
+            switch ((int)selectedTheme)
+            {
+                case 0:
+                    colorString = "#002D8A";
+                    break;
+                case 1:
+                    colorString = "#B6B805";
+                    break;
+                case 2:
+                    colorString = "#8847FF";
+                    break;
+                case 3:
+                    colorString = "#56B1B5";
+                    break;
+                case 4:
+                    colorString = "#D5D5D5";
+                    break;
+                default:
+                    Debug.Log("Invalid theme index");
+                    break;
 
+            }
+
+            if (backgroundImage != null)
+            {
+                backgroundImage.sprite = theme.backgroundImage;
+                AudioManager.instance.ChangeColorFromHex(backgroundImage, colorString);
+                Debug.Log("Background image has been applied");
+            }
+            else
+            {
+                Debug.Log("Background Image is null");
+            }
             if (postProcessingVolume != null && theme.postProcessingProfile != null)
                 postProcessingVolume.profile = theme.postProcessingProfile;
         }

@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 3
   tags:
   - Ground
+  - Slope
+  - Slippery
   layers:
   - Default
   - TransparentFX
@@ -16,7 +18,7 @@ TagManager:
   - Ground
   - ForeGround
   - Wall
-  - 
+  - Actual Player
   - 
   - 
   - 

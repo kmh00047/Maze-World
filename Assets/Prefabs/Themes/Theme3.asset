@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a30972cd404f5084080f13882a6759c4, type: 3}
   m_Name: Theme3
   m_EditorClassIdentifier: 
-  backgroundImage: {fileID: 21300000, guid: 816d352463058f7488a74e1e59af50f1, type: 3}
+  backgroundImage: {fileID: 6504203346960777769, guid: e32d721722c647a4992bcd4f02407477, type: 3}
   postProcessingProfile: {fileID: 11400000, guid: 2e979b82ceb31fc4b87a8ee1e59d532d, type: 2}

@@ -33,6 +33,7 @@ public class DestroyButton : MonoBehaviour
         }
         else
         {
+            Debug.Log("Calling Purchase skin from Shop Management");
             ShopManagement.instance.PurchaseTheme(button_index);
         }
 

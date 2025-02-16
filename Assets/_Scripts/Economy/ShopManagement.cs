@@ -65,10 +65,10 @@ public class ShopManagement : MonoBehaviour
                 themePrice = 299;
                 break;
             case 2:
-                themeIndex = 799;
+                themePrice = 799;
                 break;
             case 3:
-                themeIndex = 1799;
+                themePrice = 1799;
                 break;
             case 4:
                 themePrice = 2499;
@@ -77,14 +77,16 @@ public class ShopManagement : MonoBehaviour
                 Debug.Log("Invalid index of the ball skins.");
                 break;
         }
-
+        Debug.Log("Decided Theme Price = " + themePrice);
         if (themeIndex < 0 || themeIndex >= Shop.instance.GetUnlockedThemes().Length) return;
 
         if (!Shop.instance.GetUnlockedThemes()[themeIndex] && AudioManager.coinCount >= themePrice)
         {
+            Debug.Log("Coins before purchase: " + AudioManager.coinCount);
             AudioManager.coinCount -= themePrice;
             Shop.instance.UnlockTheme(themeIndex);
             coinUIUpdater.UpdateCoinUI();
+            Debug.Log("Coins after purchase: " + AudioManager.coinCount);
             SaveProgress();
         }
 

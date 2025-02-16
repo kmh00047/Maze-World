@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2662953883398036913}
   - component: {fileID: 1767490829713414519}
   - component: {fileID: -4234787218729436402}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Ball4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -78,7 +78,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 4354231566380549168, guid: fff236c22e0581a4d80686a8ebf9bb68, type: 3}
-  m_Color: {r: 0.68824893, g: 0.7106918, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -100,4 +100,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3559293be7b0b6148b9dcb10e213aad8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 300
+  rotationSpeed: 200

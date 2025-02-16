@@ -45,16 +45,18 @@ public class AudioManager : MonoBehaviour
             // If the gameObject has persisted from scene to scene, i.e instance already exist
             Destroy(gameObject);
         }
+        
     }
 
     private void Start()
     {
         //QualitySettings.SetQualityLevel(5);
-        LoadData();
         
+
 
         // Reset Player Prefs
         //PlayerPrefs.DeleteAll();
+        
     }
    
     // Def for the loaded event 
@@ -63,9 +65,13 @@ public class AudioManager : MonoBehaviour
         if (scene.name == menuSceneName)
         {
             Shop.instance.FindUIReferences();
+            LoadData();
         }
+        // For debugging purpose only
+        //coinCount = 10000;
         ManageButtons();
         Shop.instance.backgroundImage = GameObject.Find("Background").GetComponent<SpriteRenderer>();
+        if (Shop.instance.backgroundImage != null) Shop.instance.ApplyTheme();
         rewardText = GameObject.Find("RewardText").GetComponent<TextMeshProUGUI>();
     }
 
@@ -263,5 +269,23 @@ public class AudioManager : MonoBehaviour
         levelNumber = data.Level;
         coinCount = data.Coins;
         HighScores = data.HighScores;
+        Debug.Log("Data loaded successfully");
+    }
+
+    public void ChangeColorFromHex(SpriteRenderer spriteRenderer, string hex)
+    {
+        if (ColorUtility.TryParseHtmlString(hex, out Color newColor))
+        {
+            spriteRenderer.color = newColor;
+        }
+        else
+        {
+            Debug.LogError("Invalid Hex Code!");
+        }
+    }
+
+    public void ChangeColorFromRGB(SpriteRenderer spriteRenderer, float r, float g, float b)
+    {
+        spriteRenderer.color = new Color(r, g, b);
     }
 }
