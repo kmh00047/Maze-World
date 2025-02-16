@@ -6,19 +6,16 @@ public class PowerUpFloat : MonoBehaviour
 {
 
     public GameObject gameOverScreen, gamePlayScreen;
-
+    public Timer timer;
     public float amplitude = 0.3f; 
     public float frequency = 2f;
     public GameObject gamePlayUI;
     
-    public AudioManager AudioManagerInstance = AudioManager.instance;
     private Vector3 startPosition;
-
     void Start()
     {
         gameOverScreen.SetActive(false);
         startPosition = transform.position;
-        AudioManagerInstance = FindAnyObjectByType<AudioManager>();
     }
 
     void Update()
@@ -35,11 +32,11 @@ public class PowerUpFloat : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             Debug.Log("Player has completed the level.");
-            if(AudioManagerInstance != null)
+            if(AudioManager.instance != null)
             {
                 // Method being called in AudioManager
-                AudioManagerInstance.InkLevelNumber(SceneManager.GetActiveScene().name);
-                AudioManagerInstance.PlayLevelEndAudio();
+                AudioManager.instance.InkLevelNumber(SceneManager.GetActiveScene().name, timer.endTime);
+                AudioManager.instance.PlayLevelEndAudio();
             }
             gameOverScreen.SetActive(true);
             gamePlayScreen.SetActive(false);

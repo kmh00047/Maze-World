@@ -8,6 +8,7 @@ public class PlayerData
 
     public bool[] UnlockedSkins;
     public bool[] UnlockedThemes;
+    public float[] HighScores;
 
     public PlayerData(Player player)
     {
@@ -18,5 +19,6 @@ public class PlayerData
 
         UnlockedSkins = player.UnlockedSkins;
         UnlockedThemes = player.UnlockedThemes;
+        HighScores = player.HighScores;
     }
 }

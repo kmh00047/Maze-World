@@ -3,6 +3,7 @@ using UnityEngine;
 public class ShopManagement : MonoBehaviour
 {
     public static ShopManagement instance;
+    [SerializeField] public CoinUIUpdater coinUIUpdater;
 
     private void Awake()
     {
@@ -10,14 +11,40 @@ public class ShopManagement : MonoBehaviour
             instance = this;
     }
 
-    public void PurchaseSkin(int skinIndex , int skinPrice)
+    public void PurchaseSkin(int skinIndex)
     {
+        int skinPrice = 0;
+        switch (skinIndex)
+        {
+            case 0:
+                skinPrice = 0;
+                break;
+            case 1:
+                skinPrice = 99;
+                break;
+            case 2:
+                skinPrice = 499;
+                break;
+            case 3:
+                skinPrice = 1199;
+                break;
+            case 4:
+                skinPrice = 1999;
+                break;
+            default:
+                Debug.Log("Invalid index of the ball skins.");
+                break;
+        }
+
         if (skinIndex < 0 || skinIndex >= Shop.instance.GetUnlockedSkins().Length) return;
 
         if (!Shop.instance.GetUnlockedSkins()[skinIndex] && AudioManager.coinCount >= skinPrice)
         {
+            Debug.Log("Coins before purchase: " + AudioManager.coinCount);
             AudioManager.coinCount -= skinPrice;
             Shop.instance.UnlockSkin(skinIndex);
+            coinUIUpdater.UpdateCoinUI();
+            Debug.Log("Coins after purchase: " + AudioManager.coinCount);
             SaveProgress();
         }
         else
@@ -26,14 +53,38 @@ public class ShopManagement : MonoBehaviour
         }
     }
 
-    public void PurchaseTheme(int themeIndex , int themePrice)
+    public void PurchaseTheme(int themeIndex)
     {
+        int themePrice = 0;
+        switch (themeIndex)
+        {
+            case 0:
+                themePrice = 0;
+                break;
+            case 1:
+                themePrice = 299;
+                break;
+            case 2:
+                themeIndex = 799;
+                break;
+            case 3:
+                themeIndex = 1799;
+                break;
+            case 4:
+                themePrice = 2499;
+                break;
+            default:
+                Debug.Log("Invalid index of the ball skins.");
+                break;
+        }
+
         if (themeIndex < 0 || themeIndex >= Shop.instance.GetUnlockedThemes().Length) return;
 
         if (!Shop.instance.GetUnlockedThemes()[themeIndex] && AudioManager.coinCount >= themePrice)
         {
-            AudioManager.coinCount -= 150;
+            AudioManager.coinCount -= themePrice;
             Shop.instance.UnlockTheme(themeIndex);
+            coinUIUpdater.UpdateCoinUI();
             SaveProgress();
         }
 
@@ -45,10 +96,16 @@ public class ShopManagement : MonoBehaviour
 
     public void SelectSkin(int skinIndex)
     {
+        Debug.Log("Select Skin button pressed");
         if (Shop.instance.GetUnlockedSkins()[skinIndex])
         {
             Shop.instance.SetSkin((Shop.BallSkins)skinIndex);
+            Debug.Log("Ball selected skin: " + skinIndex);
             SaveProgress();
+        }
+        else
+        {
+            Debug.Log("Ball not purchased yet!");
         }
     }
 
@@ -59,7 +116,13 @@ public class ShopManagement : MonoBehaviour
             Shop.instance.SetTheme((Shop.Themes)themeIndex);
             SaveProgress();
         }
+        else
+        {
+            Debug.Log("Theme not Purchased yet!");
+        }
     }
+
+    
 
     private void SaveProgress()
     {

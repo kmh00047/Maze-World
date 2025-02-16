@@ -2,12 +2,15 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
+using TMPro;
+using UnityEditor.PackageManager.Requests;
 
 
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager instance { get; private set; }
     public AudioSource audioSource;
+    [SerializeField] private TextMeshProUGUI rewardText;
 
     // Audio Clips to be shuffled through script
     public AudioClip buttonClick;
@@ -18,6 +21,7 @@ public class AudioManager : MonoBehaviour
 
     [Tooltip("Shows how many levels are completed")]
     public static int levelNumber = 0;
+    public float[] HighScores = new float[10];
 
     [Tooltip("Buttons for all the levels in the Game")]
     public Button[] levelButtons;
@@ -46,29 +50,23 @@ public class AudioManager : MonoBehaviour
     private void Start()
     {
         //QualitySettings.SetQualityLevel(5);
+        LoadData();
+        
 
-        LoadData();        
-        /// Not sure why but works with UnityEngine.Object only
-        Button[] buttons = UnityEngine.Object.FindObjectsByType<Button>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
-        foreach (Button button in buttons)
-        {
-            button.onClick.AddListener(PlayButtonClickAudio);
-        }
-
-        if (SceneManager.GetActiveScene().name == menuSceneName)
-        {
-            AssignLevelButtons();
-            UpdateLevelButtons();
-        }
+        // Reset Player Prefs
+        //PlayerPrefs.DeleteAll();
     }
+   
     // Def for the loaded event 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         if (scene.name == menuSceneName)
         {
-            AssignLevelButtons();
-            UpdateLevelButtons();
+            Shop.instance.FindUIReferences();
         }
+        ManageButtons();
+        Shop.instance.backgroundImage = GameObject.Find("Background").GetComponent<SpriteRenderer>();
+        rewardText = GameObject.Find("RewardText").GetComponent<TextMeshProUGUI>();
     }
 
     private void AssignLevelButtons()
@@ -97,7 +95,21 @@ public class AudioManager : MonoBehaviour
             } 
         } 
     }
+    private void ManageButtons()
+    {
+        /// Not sure why but works with UnityEngine.Object only
+        Button[] buttons = UnityEngine.Object.FindObjectsByType<Button>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
+        foreach (Button button in buttons)
+        {
+            button.onClick.AddListener(PlayButtonClickAudio);
+        }
 
+        if (SceneManager.GetActiveScene().name == menuSceneName)
+        {
+            AssignLevelButtons();
+            UpdateLevelButtons();
+        }
+    }
     private void UpdateLevelButtons()
     {
         // Disable all level buttons
@@ -127,8 +139,36 @@ public class AudioManager : MonoBehaviour
         }
     }
     // Called from the powerupAnimation script when player completes the level
-    public void InkLevelNumber(string scene)
+    public void InkLevelNumber(string scene , float elapsedTime)
     {
+        int levelIndex = SceneManager.GetSceneByName(scene).buildIndex;
+        float levelReward = 20f;
+        levelReward = (levelReward + (10 * levelIndex)) * (1 + ((10 - elapsedTime) / 510));
+        if (levelReward < 1) levelReward = 1;
+
+        // If it is new high score, save it in float array
+        if (elapsedTime < HighScores[levelIndex - 1] || HighScores[levelIndex - 1] == 0)
+        {
+            HighScores[levelIndex - 1] = elapsedTime;
+            Debug.Log("New speedrun: Level " + levelIndex + " new speedrun time is " + elapsedTime);
+            levelReward *= 1.5f;
+            Debug.Log("Reward = " + (int)levelReward);
+        }
+        else
+        {
+            Debug.Log("You completed the level in " + (int)elapsedTime + " seconds");
+            Debug.Log("Reward = " + (int)levelReward);
+        }
+        coinCount = coinCount + (int)levelReward;
+        if(rewardText != null)
+        {
+            rewardText.text = $"Nitcoins Earned = {(int)levelReward}\nTotal Nitcoins = {coinCount}";
+        }
+
+        Debug.Log("Coins = " + coinCount);
+        SaveGame();
+
+        // Update level number to keep track of the number if levels completed
         if (levelNumber < SceneManager.GetSceneByName(scene).buildIndex)
         {
             levelNumber = SceneManager.GetSceneByName(scene).buildIndex;
@@ -140,13 +180,15 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    
+
     // Play different audios
     void PlayButtonClickAudio()
     {
         if (audioSource != null && buttonClick != null)
         {
             audioSource.clip = buttonClick;
-            audioSource.PlayOneShot(buttonClick);        }
+            audioSource.PlayOneShot(buttonClick);}
     }
 
     public void PlayLevelEndAudio()
@@ -220,5 +262,6 @@ public class AudioManager : MonoBehaviour
 
         levelNumber = data.Level;
         coinCount = data.Coins;
+        HighScores = data.HighScores;
     }
 }

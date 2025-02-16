@@ -5,7 +5,7 @@ using TMPro;
 public class Timer : MonoBehaviour
 {
     private float startTime;
-    public float endTime = 0;
+    public float endTime;
     private TextMeshProUGUI elapsedTimeText;
 
     void Start()
@@ -27,5 +27,6 @@ public class Timer : MonoBehaviour
 
         // Update the Text component with the elapsed time
         elapsedTimeText.text = string.Format("{0}:{1}", minutes, seconds);
+        endTime = elapsedTime;
     }
 }

@@ -7,6 +7,7 @@ public class Player
 
     public bool[] UnlockedSkins;
     public bool[] UnlockedThemes;
+    public float[] HighScores;
 
     public Player()
     {
@@ -18,5 +19,6 @@ public class Player
 
         UnlockedSkins = Shop.instance.GetUnlockedSkins();
         UnlockedThemes = Shop.instance.GetUnlockedThemes();
+        HighScores = AudioManager.instance.HighScores;
     }
 }

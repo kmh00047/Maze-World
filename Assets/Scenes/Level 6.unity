@@ -3880,7 +3880,7 @@ GameObject:
   - component: {fileID: 576103308}
   - component: {fileID: 576103307}
   m_Layer: 6
-  m_Name: BlueBackground
+  m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8900,10 +8900,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameOverScreen: {fileID: 205829301}
   gamePlayScreen: {fileID: 609297286}
+  timer: {fileID: 0}
   amplitude: 0.3
   frequency: 2
   gamePlayUI: {fileID: 722032459}
-  AudioManagerInstance: {fileID: 0}
 --- !u!212 &1579936208
 SpriteRenderer:
   m_ObjectHideFlags: 0

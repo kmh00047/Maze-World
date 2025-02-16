@@ -16,29 +16,7 @@ public class Settings : MonoBehaviour
     Resolution[] resolutions;
     void Start()
     {
-        resolutions = Screen.resolutions; // Get the available resolutions on system
-        resolutionDropDown.ClearOptions();
-
-        List<string> options = new List<string>();
-
-        int currentResolution = 0;
-        for (int i = 0; i < resolutions.Length; i++)
-        { 
-            // Append all the resolutions in the resolutions array
-            string option = resolutions[i].width + " x " + resolutions[i].height;
-            options.Add(option);
-
-            // Getting the runtime resolution of the game
-            if (resolutions[i].width == Screen.currentResolution.width && resolutions[i].height == Screen.currentResolution.height)
-            {
-                currentResolution = i;
-            }
-        }
-
-        // Adding resolutions to UI dropDown
-        resolutionDropDown.AddOptions(options);
-        resolutionDropDown.value = currentResolution;
-        resolutionDropDown.RefreshShownValue();
+         if(resolutionDropDown != null) GetResolutionsFromDevice();
 
 
         // Initialize sliders and toggle with current settings
@@ -88,5 +66,32 @@ public class Settings : MonoBehaviour
     { 
         Screen.fullScreen = isFullscreen; 
         PlayerPrefs.SetInt("Fullscreen", isFullscreen ? 1 : 0); 
+    }
+
+    private void GetResolutionsFromDevice()
+    {
+        resolutions = Screen.resolutions; // Get the available resolutions on system
+        resolutionDropDown.ClearOptions();
+
+        List<string> options = new List<string>();
+
+        int currentResolution = 0;
+        for (int i = 0; i < resolutions.Length; i++)
+        {
+            // Append all the resolutions in the resolutions array
+            string option = resolutions[i].width + " x " + resolutions[i].height;
+            options.Add(option);
+
+            // Getting the runtime resolution of the game
+            if (resolutions[i].width == Screen.currentResolution.width && resolutions[i].height == Screen.currentResolution.height)
+            {
+                currentResolution = i;
+            }
+        }
+
+        // Adding resolutions to UI dropDown
+        resolutionDropDown.AddOptions(options);
+        resolutionDropDown.value = currentResolution;
+        resolutionDropDown.RefreshShownValue();
     }
 }

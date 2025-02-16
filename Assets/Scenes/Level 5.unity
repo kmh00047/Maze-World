@@ -1417,10 +1417,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameOverScreen: {fileID: 509097331}
   gamePlayScreen: {fileID: 825769234}
+  timer: {fileID: 144708586}
   amplitude: 0.3
   frequency: 2
   gamePlayUI: {fileID: 550557848}
-  AudioManagerInstance: {fileID: 0}
 --- !u!212 &264897898
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -8510,7 +8510,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &1386047377
@@ -11359,7 +11359,7 @@ GameObject:
   - component: {fileID: 1844572934}
   - component: {fileID: 1844572933}
   m_Layer: 6
-  m_Name: BlueBackground
+  m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
