@@ -30,6 +30,8 @@ public class AudioManager : MonoBehaviour
 
     public static int coinCount = 0;
 
+    private float levelReward;
+
     private void Awake()
     {
         //We check if the instance is null i.e we freshly started the game
@@ -72,7 +74,8 @@ public class AudioManager : MonoBehaviour
         
         Shop.instance.backgroundImage = GameObject.Find("Background").GetComponent<SpriteRenderer>();
         if (Shop.instance.backgroundImage != null) Shop.instance.ApplyTheme();
-        
+        rewardText = GameObject.Find("RewardText").GetComponent<TextMeshProUGUI>();
+
     }
 
     private void AssignLevelButtons()
@@ -148,12 +151,14 @@ public class AudioManager : MonoBehaviour
     public void InkLevelNumber(string scene , float elapsedTime)
     {
         int levelIndex = SceneManager.GetSceneByName(scene).buildIndex;
-        float levelReward = 20f;
+        levelReward = 20f;
         levelReward = (levelReward + (10 * levelIndex)) * (1 + ((10 - elapsedTime) / 510));
-        if (levelReward < 1) levelReward = 1;
+        levelReward -= 20;
+        if (levelReward < 5) levelReward = 5;
 
         float previousRecord = HighScores[levelIndex - 1];
         float minImprovement = previousRecord * 0.9f;  // Require at least 10% improvement
+        
 
         // If it's a new high score and the improvement is significant
         if (elapsedTime < previousRecord || previousRecord == 0)
@@ -177,7 +182,7 @@ public class AudioManager : MonoBehaviour
 
         if (rewardText != null)
         {
-            rewardText.text = $"Nitcoins Earned = {(int)levelReward}\nTotal Nitcoins = {coinCount}";
+            rewardText.text = $"Time Elapsed: {(int)elapsedTime} seconds\nPrvious Record = {(int)previousRecord}\nNitcoins Earned = {(int)levelReward}\nTotal Nitcoins = {coinCount}";
         }
 
         Debug.Log("Coins = " + coinCount);
@@ -304,5 +309,15 @@ public class AudioManager : MonoBehaviour
     public void ResetCinematic()
     {
         PlayerPrefs.SetInt("isCinematicRun", 0); // Reset the key to allow cinematic to run again
+    }
+
+    public void DoubleLevelReward()
+    {
+        coinCount += (int)levelReward;
+    }
+
+    public void RewardCoins()
+    {
+        coinCount += 200;
     }
 }

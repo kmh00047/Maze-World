@@ -61,7 +61,7 @@ public class Movement : MonoBehaviour
         if (isGrounded)
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0);
-            rb.AddForce(Vector2.up * jumpForce * 0.2f, ForceMode2D.Impulse);
+            rb.AddForce(jumpForce * 0.2f * Vector2.up, ForceMode2D.Impulse);
             if (AudioManager.instance != null)
                 AudioManager.instance.PlayJumpAudio();
             animator.Play("Scale Up");
@@ -97,16 +97,6 @@ public class Movement : MonoBehaviour
                 rb.linearVelocity -= new Vector2(deceleration * Time.deltaTime, 0);
         }
 
-        // Looking for Touch. Only for android
-        if (TouchBegan())
-        {
-            OnJump(new InputAction.CallbackContext());
-        }
-
-        if (TouchEnded())
-        {
-            OnJumpRelease(new InputAction.CallbackContext());
-        }
     }
 
     private void LateUpdate()
@@ -125,53 +115,7 @@ public class Movement : MonoBehaviour
             rb.linearVelocity = new Vector2(-maxSpeed, rb.linearVelocity.y);
         }
     }
-    private bool TouchBegan()
-    {
-        if (Touchscreen.current == null)
-            return false;
-
-        foreach (var touch in Touchscreen.current.touches)
-        {
-            if (touch.press.wasPressedThisFrame && !IsTouchOverUI(touch.position.ReadValue()))
-            {
-                return true; // Found a valid touch, allow jumping
-            }
-        }
-        return false;
-    }
-
-    private bool TouchEnded()
-    {
-        if (Touchscreen.current == null)
-            return false;
-
-        foreach (var touch in Touchscreen.current.touches)
-        {
-            if (touch.press.wasReleasedThisFrame && !IsTouchOverUI(touch.position.ReadValue()))
-            {
-                return true; // Found a valid touch release, allow jump release
-            }
-        }
-        return false;
-    }
-
-    // Updated IsTouchOverUI to check specific positions
-    private bool IsTouchOverUI(Vector2 position)
-    {
-        if (EventSystem.current == null)
-            return false;
-
-        PointerEventData eventData = new PointerEventData(EventSystem.current)
-        {
-            position = position
-        };
-
-        var results = new System.Collections.Generic.List<RaycastResult>();
-        EventSystem.current.RaycastAll(eventData, results);
-
-        return results.Count > 0; // Returns true if the touch is over a UI element
-    }
-
+    
     public void OnMoveLeft(bool isPressed)
     {
         moveInput.x = isPressed ? -1f : 0f;

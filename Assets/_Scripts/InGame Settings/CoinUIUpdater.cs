@@ -15,7 +15,7 @@ public class CoinUIUpdater : MonoBehaviour
     {
         if (text != null && AudioManager.instance != null)
         {
-            text.text = "NitCoins: " + AudioManager.coinCount;
+            text.text = AudioManager.coinCount.ToString();
             Debug.Log("Coins UI updated");
         }
         else

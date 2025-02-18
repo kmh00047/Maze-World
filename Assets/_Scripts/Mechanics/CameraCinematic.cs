@@ -27,6 +27,9 @@ public class CameraCinematic : MonoBehaviour
     private Camera cam;
     private float originalFOV;
     private Movement playerMovement;
+    [SerializeField] GameObject Border;
+    [SerializeField] GameObject Timer;
+    [SerializeField] GameObject BackButton;
 
     void Start()
     {
@@ -56,7 +59,10 @@ public class CameraCinematic : MonoBehaviour
     IEnumerator CinematicSequence()
     {
         Time.timeScale = 0f; // Freeze time
-        if (playerMovement != null) playerMovement.enabled = false; 
+        if (playerMovement != null) playerMovement.enabled = false;
+        if (Border != null) Border.SetActive(false);
+        if (Timer != null) Timer.SetActive(false);
+        if (BackButton != null) BackButton.SetActive(false);
 
         
         yield return StartCoroutine(MoveCamera(playerPosition, zoomOutFOV, textAtPlayerPosition, waitTimeAtEachStage));
@@ -66,8 +72,10 @@ public class CameraCinematic : MonoBehaviour
         yield return StartCoroutine(MoveCamera(playerPosition, zoomInFOV, textAtFinalPosition, waitTimeAtEachStage));
 
         Time.timeScale = 1f; 
-        if (playerMovement != null) playerMovement.enabled = true; 
-
+        if (playerMovement != null) playerMovement.enabled = true;
+        if (Border != null) Border.SetActive(true);
+        if (Timer != null) Timer.SetActive(true);
+        if (BackButton != null) BackButton.SetActive(true);
         // Set PlayerPrefs to make the cinematic as run
         PlayerPrefs.SetInt("isCinematicRun", 1);
 

@@ -64,6 +64,10 @@ public class ShopManagement : MonoBehaviour
         }
         else
         {
+            string Output = "Not Enough NitCoins";
+            timedMessage = timedMessage.GetComponent<TimedMessage>();
+            timedMessage.ShowMessage(Output);
+            Debug.Log(Output);
             Debug.Log("Not enough coins!");
         }
     }
@@ -113,6 +117,10 @@ public class ShopManagement : MonoBehaviour
 
         else
         {
+            string Output = "Not Enough NitCoins";
+            timedMessage = timedMessage.GetComponent<TimedMessage>();
+            timedMessage.ShowMessage(Output);
+            Debug.Log(Output);
             Debug.Log("Not enough coins!");
         }
     }

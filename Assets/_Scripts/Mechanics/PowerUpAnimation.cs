@@ -1,5 +1,7 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class PowerUpFloat : MonoBehaviour
@@ -12,6 +14,7 @@ public class PowerUpFloat : MonoBehaviour
     public GameObject gamePlayUI;
     
     private Vector3 startPosition;
+    private TextMeshProUGUI rewardText;
     void Start()
     {
         gameOverScreen.SetActive(false);
@@ -24,6 +27,8 @@ public class PowerUpFloat : MonoBehaviour
         float newY = startPosition.y + Mathf.Sin(Time.time * frequency) * amplitude;
 
         transform.position = new Vector3(startPosition.x, newY, startPosition.z);
+
+        
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -41,6 +46,7 @@ public class PowerUpFloat : MonoBehaviour
             gameOverScreen.SetActive(true);
             gamePlayScreen.SetActive(false);
             gamePlayUI.SetActive(false);
+
         }
     }
 }
