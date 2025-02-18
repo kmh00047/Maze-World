@@ -385,7 +385,17 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Level Buttons Mesh_0: -2288997609089658946
+      Level Buttons Mesh_1: -866665523069599870
+      Level Buttons Mesh_2: 6229459582048524657
+      Level Buttons Mesh_3: 7521618039951639722
+      Level Buttons Mesh_4: 417778539411516272
+      Level Buttons Mesh_5: -931976274992964205
+      Level Buttons Mesh_6: -8176881681170559132
+      Level Buttons Mesh_7: -6962515761453116575
+      Level Buttons Mesh_8: -1498594860875133257
+      Level Buttons Mesh_9: 1886846170458041762
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

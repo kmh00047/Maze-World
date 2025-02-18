@@ -6,6 +6,7 @@ public class MovingPlatforms : MonoBehaviour
 {
     [Tooltip("Drag and drop the parent object of the Player")]
     public GameObject gamePlayMenu;
+    
     //[Tooltip("Drag and drop the PlayerPrefab here from the project assets")]
     //public GameObject PlayerPrefab;
     //[Tooltip("Drag and drop the texture of the Player here")]
@@ -58,8 +59,13 @@ public class MovingPlatforms : MonoBehaviour
         {
             player = collision.gameObject;
             //PlayerText.SetActive(false);
-            newBall = Instantiate(platformPrefab.playerPrefabs[platformPrefab.ballReference], player.transform.position, player.transform.rotation);
-            player.transform.SetParent(transform);
+            GameObject toBeInstantiated = platformPrefab.playerPrefabs[platformPrefab.ballReference];
+            
+
+            newBall = Instantiate(toBeInstantiated, player.transform.position, player.transform.rotation);
+            newBall.transform.localScale = new Vector3(newBall.transform.localScale.x/2.55f, newBall.transform.localScale.y / 2.55f, 1); 
+
+            if(gameObject.activeSelf)player.transform.SetParent(transform);
 
             Debug.Log("Player landed on the platform.");
         }
@@ -75,7 +81,7 @@ public class MovingPlatforms : MonoBehaviour
                 Debug.Log("Destroyed the new ball");
             }
             //PlayerText.SetActive(true);
-            collision.gameObject.transform.SetParent(gamePlayMenu.transform);
+            if(gamePlayMenu.activeSelf) collision.gameObject.transform.SetParent(gamePlayMenu.transform);
             Debug.Log("Player exited the platform.");
         }
     }

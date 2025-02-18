@@ -2,11 +2,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Rendering;
+using TMPro;
 
 public class Shop : MonoBehaviour
 {
     public static Shop instance;
-
+    [SerializeField] private TimedMessage timedMessage;
     public enum BallSkins { Ball1, Ball2, Ball3, Ball4, Ball5 }
     public enum Themes { Theme1, Theme2, Theme3, Theme4, Theme5 }
 
@@ -16,7 +17,7 @@ public class Shop : MonoBehaviour
 
     [SerializeField] private List<ThemeData> themeDatas = new List<ThemeData>();
     private Dictionary<Themes, ThemeData> themes;
-    private Themes selectedTheme = Themes.Theme1; // Default
+    public Themes selectedTheme = Themes.Theme1; // Default
     [SerializeField] private GameObject selectIconPrefab;
     [SerializeField] private RectTransform[] selectBallIconPosition = new RectTransform[5];
     [SerializeField] private RectTransform[] selectThemeIconPosition = new RectTransform[5];
@@ -40,6 +41,13 @@ public class Shop : MonoBehaviour
         LoadProgress(); // Load saved progress
     }
 
+    public void FindTimedMessage()
+    {
+        if(timedMessage == null)
+        {
+            timedMessage = GameObject.Find("TimedMessage").GetComponent<TimedMessage>();
+        }
+    }
     public void FindUIReferences()
     {
         // Find the Coin UI Updater again
@@ -127,10 +135,16 @@ public class Shop : MonoBehaviour
         if (unlockedSkins[(int)newSkin])
         {
             selectedSkin = newSkin;
+
+            string Output = "Skin Applied";
+            timedMessage = timedMessage.GetComponent<TimedMessage>();
+            timedMessage.ShowMessage(Output);
+            Debug.Log(Output);
         }
         else
         {
-            Debug.Log("Selected skin is not unlocked yet");
+            string Output = "Selected skin is not unlocked yet";
+            Debug.Log(Output);
         }
 
         // Destroy old icon if exists
@@ -155,6 +169,11 @@ public class Shop : MonoBehaviour
         if (unlockedThemes[(int)newTheme])
         {
             selectedTheme = newTheme;
+
+            string Output = "Theme applied";
+            timedMessage = timedMessage.GetComponent<TimedMessage>();
+            timedMessage.ShowMessage(Output);
+            Debug.Log(Output);
         }
 
         ApplyTheme();
@@ -191,7 +210,7 @@ public class Shop : MonoBehaviour
             switch ((int)selectedTheme)
             {
                 case 0:
-                    colorString = "#002D8A";
+                    colorString = "#FFFFFF";
                     break;
                 case 1:
                     colorString = "#B6B805";

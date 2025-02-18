@@ -1,23 +1,23 @@
 # ninja log v5
-57	4997	7596029018075713	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	2bb1666bbc0f71e1
-74	5995	7596029029027620	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	497f2b7fa77d05b1
-63	4940	7596029018729205	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	a447760741b9ead8
-69	6778	7596029037675608	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	4a7a1a093bb7d21f
-4941	9507	7596029065741587	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	47178bfc1c980b90
-5996	6981	7596029040465698	FramePacing/CMakeFiles/swappywrapper.dir/UnitySwappyWrapper.cpp.o	5da49f648cc0729f
-50	7790	7596029048531747	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	35e05b7c172db4fe
-105	7250	7596029042840770	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	539d47d3e2e2b67d
-6981	7828	7596029048816408	D:/_Unity Projects/Maze-World/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/682e3y4v/obj/arm64-v8a/libswappywrapper.so	e37dcce88051734b
-4997	9423	7596029064562489	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	6cc59f5719df0fd6
-9507	9924	7596029068635688	D:/_Unity Projects/Maze-World/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/682e3y4v/obj/arm64-v8a/libgame.so	98bd575fd4249669
-45	3003	7598735238236992	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	497f2b7fa77d05b1
 25	3019	7598735238187124	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	2bb1666bbc0f71e1
+45	3003	7598735238236992	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	497f2b7fa77d05b1
 29	3108	7598735239289342	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	a447760741b9ead8
-3108	3524	7598735243718129	FramePacing/CMakeFiles/swappywrapper.dir/UnitySwappyWrapper.cpp.o	5da49f648cc0729f
+3004	4963	7598735258184159	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	47178bfc1c980b90
 34	3544	7598735243728117	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	4a7a1a093bb7d21f
+3108	3524	7598735243718129	FramePacing/CMakeFiles/swappywrapper.dir/UnitySwappyWrapper.cpp.o	5da49f648cc0729f
+10	4433	7598735251997583	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	35e05b7c172db4fe
 39	3981	7598735248190915	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	539d47d3e2e2b67d
 3524	4085	7598735249264615	D:/_Unity Projects/Maze-World/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/682e3y4v/obj/arm64-v8a/libswappywrapper.so	e37dcce88051734b
-10	4433	7598735251997583	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	35e05b7c172db4fe
-3004	4963	7598735258184159	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	47178bfc1c980b90
 3020	5115	7598735259723895	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	6cc59f5719df0fd6
 5116	5274	7598735261204744	D:/_Unity Projects/Maze-World/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/682e3y4v/obj/arm64-v8a/libgame.so	98bd575fd4249669
+153	4234	7615216232271575	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	497f2b7fa77d05b1
+139	4252	7615216232096665	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	2bb1666bbc0f71e1
+122	4393	7615216233555978	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	a447760741b9ead8
+167	4454	7615216234405629	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	47178bfc1c980b90
+4393	4797	7615216237968759	FramePacing/CMakeFiles/swappywrapper.dir/UnitySwappyWrapper.cpp.o	5da49f648cc0729f
+106	4942	7615216239393819	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	4a7a1a093bb7d21f
+4798	5277	7615216242655207	D:/_Unity Projects/Maze-World/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/682e3y4v/obj/arm64-v8a/libswappywrapper.so	e37dcce88051734b
+66	5801	7615216248054167	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	35e05b7c172db4fe
+4253	6405	7615216254116630	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	6cc59f5719df0fd6
+4235	6661	7615216256721657	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	539d47d3e2e2b67d
+6662	6802	7615216258019893	D:/_Unity Projects/Maze-World/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/682e3y4v/obj/arm64-v8a/libgame.so	98bd575fd4249669

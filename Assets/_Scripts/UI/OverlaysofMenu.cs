@@ -33,7 +33,14 @@ public class MenuController : MonoBehaviour
     public void StartGame() => SetMenu(MenuState.Level);
     public void OpenOptions() => SetMenu(MenuState.Options);
     public void OpenCredits() => SetMenu(MenuState.Credits);
-    public void OpenShop() => SetMenu(MenuState.Shop);
+    public void OpenShop() 
+    { 
+        SetMenu(MenuState.Shop);
+        Shop.instance.FindTimedMessage();
+        ShopManagement.instance.FindTimedMessage();
+        Shop.instance.SetSkin(Shop.instance.selectedSkin);
+        Shop.instance.SetTheme(Shop.instance.selectedTheme);
+    }
     public void OpenQuitMenu() => SetMenu(MenuState.Quit);
     public void BackToMain() => SetMenu(MenuState.Main);
 

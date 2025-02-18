@@ -160,7 +160,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Maze World_0: 5261916081911536519
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

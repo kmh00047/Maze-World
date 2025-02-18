@@ -485,7 +485,21 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Icons Mesh_0: 5168274096672994823
+      Icons Mesh_1: 6442037562078955601
+      Icons Mesh_10: 8343866083831175473
+      Icons Mesh_11: 1342352496939375385
+      Icons Mesh_12: -8744457813717052253
+      Icons Mesh_13: 799759153900131702
+      Icons Mesh_2: 8164683198691162031
+      Icons Mesh_3: -3083723055117214416
+      Icons Mesh_4: 6722590007843976642
+      Icons Mesh_5: -6186847550716483634
+      Icons Mesh_6: 7525411125542443635
+      Icons Mesh_7: -6461452066907045128
+      Icons Mesh_8: 7312098345329734216
+      Icons Mesh_9: 4780224372880527044
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

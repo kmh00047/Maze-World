@@ -1,16 +1,16 @@
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Audio;
+
 using UnityEngine.SceneManagement;
 using TMPro;
-using UnityEditor.PackageManager.Requests;
+
 
 
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager instance { get; private set; }
     public AudioSource audioSource;
-    [SerializeField] private TextMeshProUGUI rewardText;
+    [SerializeField] public TextMeshProUGUI rewardText;
 
     // Audio Clips to be shuffled through script
     public AudioClip buttonClick;
@@ -51,12 +51,11 @@ public class AudioManager : MonoBehaviour
     private void Start()
     {
         //QualitySettings.SetQualityLevel(5);
-        
 
-
-        // Reset Player Prefs
+        // Reset Player Prefs for debugging
         //PlayerPrefs.DeleteAll();
-        
+        //Debug.Log("Player Prefs Reset Successful");
+
     }
    
     // Def for the loaded event 
@@ -66,13 +65,14 @@ public class AudioManager : MonoBehaviour
         {
             Shop.instance.FindUIReferences();
             LoadData();
+            ManageButtons();
         }
         // For debugging purpose only
         //coinCount = 10000;
-        ManageButtons();
+        
         Shop.instance.backgroundImage = GameObject.Find("Background").GetComponent<SpriteRenderer>();
         if (Shop.instance.backgroundImage != null) Shop.instance.ApplyTheme();
-        rewardText = GameObject.Find("RewardText").GetComponent<TextMeshProUGUI>();
+        
     }
 
     private void AssignLevelButtons()
@@ -152,27 +152,36 @@ public class AudioManager : MonoBehaviour
         levelReward = (levelReward + (10 * levelIndex)) * (1 + ((10 - elapsedTime) / 510));
         if (levelReward < 1) levelReward = 1;
 
-        // If it is new high score, save it in float array
-        if (elapsedTime < HighScores[levelIndex - 1] || HighScores[levelIndex - 1] == 0)
+        float previousRecord = HighScores[levelIndex - 1];
+        float minImprovement = previousRecord * 0.9f;  // Require at least 10% improvement
+
+        // If it's a new high score and the improvement is significant
+        if (elapsedTime < previousRecord || previousRecord == 0)
         {
+            if (elapsedTime < minImprovement)  // Only grant bonus if it's 10% faster
+            {
+                levelReward *= 1.3f;
+                Debug.Log("Significant speedrun improvement! Bonus applied.");
+            }
+
             HighScores[levelIndex - 1] = elapsedTime;
             Debug.Log("New speedrun: Level " + levelIndex + " new speedrun time is " + elapsedTime);
-            levelReward *= 1.5f;
-            Debug.Log("Reward = " + (int)levelReward);
         }
         else
         {
             Debug.Log("You completed the level in " + (int)elapsedTime + " seconds");
-            Debug.Log("Reward = " + (int)levelReward);
         }
-        coinCount = coinCount + (int)levelReward;
-        if(rewardText != null)
+
+        Debug.Log("Reward = " + (int)levelReward);
+        coinCount += (int)levelReward;
+
+        if (rewardText != null)
         {
             rewardText.text = $"Nitcoins Earned = {(int)levelReward}\nTotal Nitcoins = {coinCount}";
         }
 
         Debug.Log("Coins = " + coinCount);
-        SaveGame();
+        
 
         // Update level number to keep track of the number if levels completed
         if (levelNumber < SceneManager.GetSceneByName(scene).buildIndex)
@@ -184,6 +193,7 @@ public class AudioManager : MonoBehaviour
         {
             UpdateLevelButtons();
         }
+        SaveGame();
     }
 
     
@@ -263,6 +273,7 @@ public class AudioManager : MonoBehaviour
         if (data == null) 
         {
             Debug.LogWarning("Data not loaded Properly!");
+            ResetCinematic();
             return; 
         }
 
@@ -287,5 +298,11 @@ public class AudioManager : MonoBehaviour
     public void ChangeColorFromRGB(SpriteRenderer spriteRenderer, float r, float g, float b)
     {
         spriteRenderer.color = new Color(r, g, b);
+    }
+
+    // Method to reset the cinematic and run it again
+    public void ResetCinematic()
+    {
+        PlayerPrefs.SetInt("isCinematicRun", 0); // Reset the key to allow cinematic to run again
     }
 }

@@ -4,11 +4,20 @@ public class ShopManagement : MonoBehaviour
 {
     public static ShopManagement instance;
     [SerializeField] public CoinUIUpdater coinUIUpdater;
+    [SerializeField] private TimedMessage timedMessage;
 
     private void Awake()
     {
         if (instance == null)
             instance = this;
+    }
+
+    public void FindTimedMessage()
+    {
+        if (timedMessage == null)
+        {
+            timedMessage = GameObject.Find("TimedMessage").GetComponent<TimedMessage>();
+        }
     }
 
     public void PurchaseSkin(int skinIndex)
@@ -45,6 +54,12 @@ public class ShopManagement : MonoBehaviour
             Shop.instance.UnlockSkin(skinIndex);
             coinUIUpdater.UpdateCoinUI();
             Debug.Log("Coins after purchase: " + AudioManager.coinCount);
+
+            string Output = "Ball Skin Purchased!";
+            timedMessage = timedMessage.GetComponent<TimedMessage>();
+            timedMessage.ShowMessage(Output);
+            Debug.Log(Output);
+
             SaveProgress();
         }
         else
@@ -87,6 +102,12 @@ public class ShopManagement : MonoBehaviour
             Shop.instance.UnlockTheme(themeIndex);
             coinUIUpdater.UpdateCoinUI();
             Debug.Log("Coins after purchase: " + AudioManager.coinCount);
+
+            string Output = "Theme Purchased!";
+            timedMessage = timedMessage.GetComponent<TimedMessage>();
+            timedMessage.ShowMessage(Output);
+            Debug.Log(Output);
+
             SaveProgress();
         }
 
@@ -107,7 +128,10 @@ public class ShopManagement : MonoBehaviour
         }
         else
         {
-            Debug.Log("Ball not purchased yet!");
+            string Output = "Skin is not unlocked yet";
+            timedMessage = timedMessage.GetComponent<TimedMessage>();
+            timedMessage.ShowMessage(Output);
+            Debug.Log(Output);
         }
     }
 
@@ -120,7 +144,10 @@ public class ShopManagement : MonoBehaviour
         }
         else
         {
-            Debug.Log("Theme not Purchased yet!");
+            string Output = "Theme is not unlocked yet";
+            timedMessage = timedMessage.GetComponent<TimedMessage>();
+            timedMessage.ShowMessage(Output);
+            Debug.Log(Output);
         }
     }
 
