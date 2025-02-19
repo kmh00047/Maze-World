@@ -24,12 +24,12 @@ public class BannerAds : MonoBehaviour
 
     public void LoadBannerAd()
     {
+        AdsManager.Instance.UpdateDebug("Load Banner Started");
         BannerLoadOptions options = new BannerLoadOptions
         {
             loadCallback = BannerLoaded,
             errorCallback = BannerLoadedError
         };
-
         Advertisement.Banner.Load(adUnitId, options);
     }
 
@@ -60,11 +60,15 @@ public class BannerAds : MonoBehaviour
     #endregion
 
     #region Load Callbacks
-    private void BannerLoadedError(string message)    {    }
+    private void BannerLoadedError(string message)    
+    {
+        AdsManager.Instance.UpdateDebug("Banner load Failed");
+    }
 
     private void BannerLoaded()
     {
         Debug.Log("Banner Ad Loaded");
+        AdsManager.Instance.UpdateDebug("Banner Ad Loaded");
     }
     #endregion
 

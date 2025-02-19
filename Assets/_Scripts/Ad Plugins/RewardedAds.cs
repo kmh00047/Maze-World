@@ -37,6 +37,7 @@ public class RewardedAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLi
     // Call this method with a reward type parameter when a button is pressed
     public void ShowRewardedAd(RewardType rewardType)
     {
+        
         if (isAdLoaded)
         {
             currentRewardType = rewardType;
