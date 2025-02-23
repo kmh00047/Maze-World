@@ -250,12 +250,12 @@ public class AudioManager : MonoBehaviour
     // <summary>
     // Save and Load System with Debugging
     // </summary>
-    void OnGUI()
-    {
-        // Calculate FPS
-        float fps = 1.0f / Time.deltaTime;
-        GUI.Label(new Rect(10, 10, 200, 20), "FPS: " + fps.ToString("F2"));
-    }
+    //void OnGUI()
+    //{
+    //    // Calculate FPS
+    //    float fps = 1.0f / Time.deltaTime;
+    //    GUI.Label(new Rect(10, 10, 200, 20), "FPS: " + fps.ToString("F2"));
+    //}
 
     public void SaveGame()
     {
@@ -318,7 +318,14 @@ public class AudioManager : MonoBehaviour
 
     public void RewardCoins()
     {
-        coinCount += 300;
+        coinCount += 200;
         ShopManagement.instance.coinUIUpdater.UpdateCoinUI();
+    }
+
+    public void AddCoins(int amount)
+    {
+        coinCount += amount;
+        ShopManagement.instance.coinUIUpdater.UpdateCoinUI();
+        SaveGame();
     }
 }

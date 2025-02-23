@@ -4,7 +4,7 @@ public class ShopManagement : MonoBehaviour
 {
     public static ShopManagement instance;
     [SerializeField] public CoinUIUpdater coinUIUpdater;
-    [SerializeField] private TimedMessage timedMessage;
+    public TimedMessage timedMessage;
 
     private void Awake()
     {
