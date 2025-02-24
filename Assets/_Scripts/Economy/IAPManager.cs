@@ -27,7 +27,6 @@ public class IAPManager : MonoBehaviour, IStoreListener
     [SerializeField] private TextMeshProUGUI priceText3000;
     [SerializeField] private TextMeshProUGUI priceText5000;
 
-    private TimedMessage timedMessage;
     private IStoreController storeController;
 
     // Called when Unity IAP has successfully initialized and products are fetched
@@ -103,12 +102,6 @@ public class IAPManager : MonoBehaviour, IStoreListener
     public void OnPurchaseFailed(Product product, PurchaseFailureDescription failureDescription)
     {
         string output = "Purchase Failed, Reason: " + failureDescription;
-        timedMessage = ShopManagement.instance.timedMessage;
-        if (timedMessage != null)
-        {
-            timedMessage = timedMessage.GetComponent<TimedMessage>();
-            timedMessage.ShowMessage(output);
-        }
         Debug.Log(output);
     }
 

@@ -318,7 +318,7 @@ public class AudioManager : MonoBehaviour
 
     public void RewardCoins()
     {
-        coinCount += 200;
+        coinCount += 300;
         ShopManagement.instance.coinUIUpdater.UpdateCoinUI();
     }
 
