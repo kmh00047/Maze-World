@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 8995660793727235649}
   - component: {fileID: 8995660793727235648}
   - component: {fileID: 8995660793727235655}
-  - component: {fileID: 8995660793727235654}
-  - component: {fileID: 8995660793727235653}
+  - component: {fileID: 6308695399926809214}
+  - component: {fileID: 1822419796870735347}
   m_Layer: 0
   m_Name: AdsManager
   m_TagString: Untagged
@@ -28,13 +28,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8995660793727235652}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.5143287, y: -0.48247233, z: 0.1874425}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8995660793727235649
 MonoBehaviour:
@@ -50,8 +50,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initializeAds: {fileID: 8995660793727235648}
   bannerAds: {fileID: 8995660793727235655}
-  interstitialAds: {fileID: 8995660793727235654}
-  rewardedAds: {fileID: 8995660793727235653}
+  interstitialAds: {fileID: 0}
+  rewardedAds: {fileID: 0}
+  DebugAd: {fileID: 0}
 --- !u!114 &8995660793727235648
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64,9 +65,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 647f8bed41465ad45aedda6348b37b75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  androidGameId: 5448315
-  iosGameId: 5448314
-  isTesting: 1
+  _androidGameId: 5797908
+  _iOSGameId: 5797909
+  _testMode: 1
 --- !u!114 &8995660793727235655
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -79,9 +80,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0bd57719408bd54096a9392d8197e40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  androidAdUnitId: Banner_Android
-  iosAdUnitId: Banner_iOS
---- !u!114 &8995660793727235654
+  _bannerPosition: 4
+  _androidAdUnitId: Banner_Android
+  _iOSAdUnitId: Banner_iOS
+--- !u!114 &6308695399926809214
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -93,9 +95,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d27df3a92822e8a40a18d90fd6fa2fc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  androidAdUnitId: Interstitial_Android
-  iosAdUnitId: Interstitial_iOS
---- !u!114 &8995660793727235653
+  _androidAdUnitId: Interstitial_Android
+  _iOsAdUnitId: Interstitial_iOS
+--- !u!114 &1822419796870735347
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -107,5 +109,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 055a016345cda3444a4e2eebf2491d14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  androidAdUnitId: Rewarded_Android
-  iosAdUnitId: Rewarded_iOS
+  _androidAdUnitId: Rewarded_Android
+  _iOSAdUnitId: Rewarded_iOS

@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class AdsManager : MonoBehaviour
 {
-    public InitializeAds initializeAds;
+    public AdsInitializer initializeAds;
     public BannerAds bannerAds;
     public InterstitialAds interstitialAds;
     public RewardedAds rewardedAds;
@@ -40,15 +40,14 @@ public class AdsManager : MonoBehaviour
         {
             bannerAds.HideBannerAd();
         }
+
     }
 
-    public void LoadAllAds()
+    public void LoadAds()
     {
-        UpdateDebug("Load ads method started");
-        rewardedAds.LoadRewardedAd();
-        interstitialAds.LoadInterstitialAd();
-        bannerAds.LoadBannerAd();
-        
+        interstitialAds.LoadAd();
+        rewardedAds.LoadAd();
+        bannerAds.LoadBanner();
     }
 
     IEnumerator ShowBannerWithDelay()

@@ -153,7 +153,7 @@ public class AudioManager : MonoBehaviour
         int levelIndex = SceneManager.GetSceneByName(scene).buildIndex;
         levelReward = 20f;
         levelReward = (levelReward + (10 * levelIndex)) * (1 + ((10 - elapsedTime) / 510));
-        levelReward -= 20;
+        levelReward -= 7;
         if (levelReward < 5) levelReward = 5;
 
         float previousRecord = HighScores[levelIndex - 1];
@@ -318,7 +318,7 @@ public class AudioManager : MonoBehaviour
 
     public void RewardCoins()
     {
-        coinCount += 300;
+        coinCount += 200;
         ShopManagement.instance.coinUIUpdater.UpdateCoinUI();
     }
 

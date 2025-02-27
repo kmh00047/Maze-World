@@ -1,77 +1,53 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Advertisements;
 
 public class BannerAds : MonoBehaviour
 {
-    [SerializeField] private string androidAdUnitId;
-    [SerializeField] private string iosAdUnitId;
+    [SerializeField] BannerPosition _bannerPosition;
+    [SerializeField] string _androidAdUnitId = "Banner_Android";
+    [SerializeField] string _iOSAdUnitId = "Banner_iOS";
+    string _adUnitId = null;
 
-    private string adUnitId;
-
-    private void Awake()
+    void Start()
     {
-        #if UNITY_IOS
-                adUnitId = iosAdUnitId;
-        #elif UNITY_ANDROID
-                adUnitId = androidAdUnitId;
-        #endif
-        
-        Advertisement.Banner.SetPosition(BannerPosition.BOTTOM_CENTER);
+#if UNITY_IOS
+        _adUnitId = _iOSAdUnitId;
+#elif UNITY_ANDROID
+        _adUnitId = _androidAdUnitId;
+#endif
+        Advertisement.Banner.SetPosition(_bannerPosition); // Set the banner position
     }
 
-    public void LoadBannerAd()
+    public void LoadBanner()
     {
-        AdsManager.Instance.UpdateDebug("Load Banner Started");
         BannerLoadOptions options = new BannerLoadOptions
         {
-            loadCallback = BannerLoaded,
-            errorCallback = BannerLoadedError
+            loadCallback = OnBannerLoaded,
+            errorCallback = OnBannerError
         };
-        Advertisement.Banner.Load(adUnitId, options);
+
+        Advertisement.Banner.Load(_adUnitId, options);
     }
+
+    void OnBannerLoaded() => Debug.Log("Banner loaded");
+
+    void OnBannerError(string message) => Debug.Log($"Banner Error: {message}");
 
     public void ShowBannerAd()
     {
         BannerOptions options = new BannerOptions
         {
-            showCallback = BannerShown,
-            clickCallback = BannerClicked,
-            hideCallback = BannerHidden
+            clickCallback = OnBannerClicked,
+            hideCallback = OnBannerHidden,
+            showCallback = OnBannerShown
         };
-        Advertisement.Banner.Show(adUnitId, options);
-    
+
+        Advertisement.Banner.Show(_adUnitId, options);
     }
 
-    public void HideBannerAd()
-    {
-        Advertisement.Banner.Hide();
-    }
+    public void HideBannerAd() => Advertisement.Banner.Hide();
 
-
-    #region Show Callbacks
-    private void BannerHidden()   {    }
-
-    private void BannerClicked()   {    }
-
-    private void BannerShown()    {    }
-    #endregion
-
-    #region Load Callbacks
-    private void BannerLoadedError(string message)    
-    {
-        AdsManager.Instance.UpdateDebug("Banner load Failed");
-    }
-
-    private void BannerLoaded()
-    {
-        Debug.Log("Banner Ad Loaded");
-        AdsManager.Instance.UpdateDebug("Banner Ad Loaded");
-    }
-    #endregion
-
-
-
+    void OnBannerClicked() => Debug.Log("Banner clicked");
+    void OnBannerShown() => Debug.Log("Banner shown");
+    void OnBannerHidden() => Debug.Log("Banner hidden");
 }

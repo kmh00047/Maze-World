@@ -1,56 +1,46 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Advertisements;
 
-public class InterstitialAds : MonoBehaviour , IUnityAdsLoadListener ,IUnityAdsShowListener
+public class InterstitialAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowListener
 {
-    [SerializeField] private string androidAdUnitId;
-    [SerializeField] private string iosAdUnitId;
+    [SerializeField] string _androidAdUnitId = "Interstitial_Android";
+    [SerializeField] string _iOsAdUnitId = "Interstitial_iOS";
+    string _adUnitId;
 
-    private string adUnitId;
-
-    private void Awake()
+    void Awake()
     {
-        #if UNITY_IOS
-                adUnitId = iosAdUnitId;
-        #elif UNITY_ANDROID
-                adUnitId = androidAdUnitId;
-        #endif
+        _adUnitId = (Application.platform == RuntimePlatform.IPhonePlayer) ? _iOsAdUnitId : _androidAdUnitId;
     }
 
-    public void LoadInterstitialAd()
+    public void LoadAd()
     {
-        Advertisement.Load(adUnitId, this);
+        Debug.Log("Loading Ad: " + _adUnitId);
+        Advertisement.Load(_adUnitId, this);
     }
 
-    public void ShowInterstitialAd()
-    {
-        Advertisement.Show(adUnitId, this);
-        LoadInterstitialAd();
+    public void ShowAd()
+    {       
+        Debug.Log("Showing Ad: " + _adUnitId);
+        Advertisement.Show(_adUnitId, this);
+        LoadAd();
     }
 
-
-
-
-    #region LoadCallbacks
-    public void OnUnityAdsAdLoaded(string placementId)
+    public void OnUnityAdsAdLoaded(string adUnitId)
     {
-        Debug.Log("Interstitial Ad Loaded");
+        Debug.Log("Ad Loaded: " + adUnitId);
     }
 
-    public void OnUnityAdsFailedToLoad(string placementId, UnityAdsLoadError error, string message)    {    }
-    #endregion
-    #region ShowCallbacks
-    public void OnUnityAdsShowFailure(string placementId, UnityAdsShowError error, string message)    {    }
-
-    public void OnUnityAdsShowStart(string placementId)    {    }
-
-    public void OnUnityAdsShowClick(string placementId)    {    }
-
-    public void OnUnityAdsShowComplete(string placementId, UnityAdsShowCompletionState showCompletionState)
+    public void OnUnityAdsFailedToLoad(string _adUnitId, UnityAdsLoadError error, string message)
     {
-        Debug.Log("Interstitial Ad Completed");
+        Debug.Log($"Error loading Ad Unit: {_adUnitId} - {error} - {message}");
     }
-    #endregion
+
+    public void OnUnityAdsShowFailure(string _adUnitId, UnityAdsShowError error, string message)
+    {
+        Debug.Log($"Error showing Ad Unit {_adUnitId}: {error} - {message}");
+    }
+
+    public void OnUnityAdsShowComplete(string _adUnitId, UnityAdsShowCompletionState showCompletionState) { }
+    public void OnUnityAdsShowStart(string _adUnitId) { }
+    public void OnUnityAdsShowClick(string _adUnitId) { }
 }

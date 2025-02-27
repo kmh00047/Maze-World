@@ -1,23 +1,23 @@
 # ninja log v5
-99	6632	7616188569843165	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	2bb1666bbc0f71e1
-112	6778	7616188571450018	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	497f2b7fa77d05b1
-93	6844	7616188571870381	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	a447760741b9ead8
-58	7449	7616188577430494	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	4a7a1a093bb7d21f
-6633	11607	7616188619479367	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	47178bfc1c980b90
-6844	7686	7616188580073366	FramePacing/CMakeFiles/swappywrapper.dir/UnitySwappyWrapper.cpp.o	5da49f648cc0729f
-49	9748	7616188600960635	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	35e05b7c172db4fe
-107	8581	7616188588802464	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	539d47d3e2e2b67d
-7686	11359	7616188614629745	D:/_Unity Projects/Maze-World/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/682e3y4v/obj/arm64-v8a/libswappywrapper.so	e37dcce88051734b
-6778	11667	7616188620493573	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	6cc59f5719df0fd6
-11667	11957	7616188623135576	D:/_Unity Projects/Maze-World/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/682e3y4v/obj/arm64-v8a/libgame.so	98bd575fd4249669
 48	4825	7616733687266335	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	2bb1666bbc0f71e1
+4826	9731	7616733736345428	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	497f2b7fa77d05b1
 36	4903	7616733687793731	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	a447760741b9ead8
 64	5247	7616733691452329	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	47178bfc1c980b90
 23	6333	7616733696041358	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	4a7a1a093bb7d21f
 5248	6488	7616733702408462	FramePacing/CMakeFiles/swappywrapper.dir/UnitySwappyWrapper.cpp.o	5da49f648cc0729f
-59	7675	7616733714906821	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	539d47d3e2e2b67d
 15	7986	7616733718570569	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	35e05b7c172db4fe
+59	7675	7616733714906821	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	539d47d3e2e2b67d
 6489	9608	7616733732278418	D:/_Unity Projects/Maze-World/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/682e3y4v/obj/arm64-v8a/libswappywrapper.so	e37dcce88051734b
-4826	9731	7616733736345428	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	497f2b7fa77d05b1
 4903	9950	7616733738955257	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	6cc59f5719df0fd6
 9950	10409	7616733743353321	D:/_Unity Projects/Maze-World/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/682e3y4v/obj/arm64-v8a/libgame.so	98bd575fd4249669
+118	4530	7623435399460894	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	2bb1666bbc0f71e1
+128	4541	7623435399570575	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	497f2b7fa77d05b1
+112	4559	7623435400358476	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	a447760741b9ead8
+105	5081	7623435405275938	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	4a7a1a093bb7d21f
+4560	5133	7623435406019362	FramePacing/CMakeFiles/swappywrapper.dir/UnitySwappyWrapper.cpp.o	5da49f648cc0729f
+123	5862	7623435411780932	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	539d47d3e2e2b67d
+32	6907	7623435423074023	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	35e05b7c172db4fe
+5133	7103	7623435421677880	D:/_Unity Projects/Maze-World/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/682e3y4v/obj/arm64-v8a/libswappywrapper.so	e37dcce88051734b
+4532	8541	7623435440152069	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	47178bfc1c980b90
+4541	8568	7623435440601624	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	6cc59f5719df0fd6
+8569	8811	7623435442841587	D:/_Unity Projects/Maze-World/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/682e3y4v/obj/arm64-v8a/libgame.so	98bd575fd4249669

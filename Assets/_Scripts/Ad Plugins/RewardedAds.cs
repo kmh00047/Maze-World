@@ -1,114 +1,64 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Advertisements;
-
-public enum RewardType
-{
-    DoubleLevelReward,
-    ShopCoins
-}
+using UnityEngine.SceneManagement;
 
 public class RewardedAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowListener
 {
-    [SerializeField] private string androidAdUnitId;
-    [SerializeField] private string iosAdUnitId;
+    [SerializeField] string _androidAdUnitId = "Rewarded_Android";
+    [SerializeField] string _iOSAdUnitId = "Rewarded_iOS";
+    string _adUnitId = null;
+    private AwardType award;
+    public enum AwardType
+    {
+        DoubleLevelReward,
+        ShopReward
+    }
 
-    private string adUnitId;
-    private RewardType currentRewardType;
-    private bool isAdLoaded = false;
-
-    private void Awake()
+    void Awake()
     {
 #if UNITY_IOS
-        adUnitId = iosAdUnitId;
+        _adUnitId = _iOSAdUnitId;
 #elif UNITY_ANDROID
-        adUnitId = androidAdUnitId;
+        _adUnitId = _androidAdUnitId;
 #endif
     }
 
-    public void LoadRewardedAd()
+    public void LoadAd()
     {
-        isAdLoaded = false; // Reset the flag
-        Advertisement.Load(adUnitId, this);
-        Debug.Log("Rewarded Ad load initiated");
+        Debug.Log("Loading Ad: " + _adUnitId);
+        Advertisement.Load(_adUnitId, this);
     }
 
-    // Call this method with a reward type parameter when a button is pressed
-    public void ShowRewardedAd(RewardType rewardType)
+    public void ShowAd(AwardType rewardType)
     {
-        
-        if (isAdLoaded)
+        Advertisement.Show(_adUnitId, this);
+        award = rewardType;
+        LoadAd();
+    }
+
+    public void OnUnityAdsShowComplete(string adUnitId, UnityAdsShowCompletionState showCompletionState)
+    {
+        if (adUnitId.Equals(_adUnitId) && showCompletionState == UnityAdsShowCompletionState.COMPLETED)
         {
-            currentRewardType = rewardType;
-            Advertisement.Show(adUnitId, this);
-        }
-        else
-        {
-            Debug.Log("Rewarded Ad is not ready yet!");
-        }
-    }
+            Debug.Log("Unity Ads Rewarded Ad Completed");
 
-    #region Load Callbacks
-    public void OnUnityAdsAdLoaded(string placementId)
-    {
-        if (placementId == adUnitId)
-        {
-            isAdLoaded = true;
-            Debug.Log("Rewarded Ad Loaded and Ready!");
-        }
-    }
-
-    public void OnUnityAdsFailedToLoad(string placementId, UnityAdsLoadError error, string message)
-    {
-        Debug.LogError($"Failed to load rewarded ad ({placementId}): {error} - {message}");
-        isAdLoaded = false;
-    }
-    #endregion
-
-    #region Show Callbacks
-    public void OnUnityAdsShowStart(string placementId)
-    {
-        Debug.Log("Rewarded Ad Show Started");
-    }
-
-    public void OnUnityAdsShowClick(string placementId)
-    {
-        Debug.Log("Rewarded Ad Clicked");
-    }
-
-    public void OnUnityAdsShowFailure(string placementId, UnityAdsShowError error, string message)
-    {
-        Debug.LogError($"Rewarded Ad Show failed: {error} - {message}");
-    }
-
-    public void OnUnityAdsShowComplete(string placementId, UnityAdsShowCompletionState showCompletionState)
-    {
-        if (placementId == adUnitId && showCompletionState == UnityAdsShowCompletionState.COMPLETED)
-        {
-            Debug.Log("Rewarded Ad Fully Watched.");
-            
-            switch (currentRewardType)
+            if (award == AwardType.DoubleLevelReward)
             {
-                case RewardType.DoubleLevelReward:
-                    
-                    AudioManager.instance.DoubleLevelReward();
-                    break;
-                case RewardType.ShopCoins:
-                    
-                    AudioManager.instance.RewardCoins();
-                    break;
-                default:
-                    Debug.LogWarning("Reward type not recognized.");
-                    break;
+                Debug.Log("Level reward Doubled.");
+                AudioManager.instance.DoubleLevelReward();
+                SceneManager.LoadScene("Menu");
+            }
+            else if (award == AwardType.ShopReward)
+            {
+                Debug.Log("Rewarded 200 coins to the Player.");
+                AudioManager.instance.RewardCoins();
             }
         }
-        else
-        {
-            Debug.Log("Rewarded Ad was not fully watched.");
-        }
-        // Reload the ad after it's shown
-        LoadRewardedAd();
     }
-    #endregion
+
+    public void OnUnityAdsAdLoaded(string adUnitId) { Debug.Log("Ad Loaded: " + adUnitId); }
+    public void OnUnityAdsFailedToLoad(string adUnitId, UnityAdsLoadError error, string message) { Debug.Log($"Error loading Ad Unit {adUnitId}: {error} - {message}"); }
+    public void OnUnityAdsShowFailure(string adUnitId, UnityAdsShowError error, string message) { Debug.Log($"Error showing Ad Unit {adUnitId}: {error} - {message}"); }
+    public void OnUnityAdsShowStart(string adUnitId) { }
+    public void OnUnityAdsShowClick(string adUnitId) { }
 }

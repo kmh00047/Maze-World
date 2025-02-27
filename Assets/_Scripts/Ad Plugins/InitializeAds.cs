@@ -1,45 +1,42 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Advertisements;
 
-
-public class InitializeAds : MonoBehaviour ,IUnityAdsInitializationListener
+public class AdsInitializer : MonoBehaviour, IUnityAdsInitializationListener
 {
-    [SerializeField] private string androidGameId;
-    [SerializeField] private string iosGameId;
-    [SerializeField] private bool isTesting;
+    [SerializeField] string _androidGameId;
+    [SerializeField] string _iOSGameId;
+    [SerializeField] bool _testMode = true;
+    private string _gameId;
 
-    private string gameId;
-
-
-    private void Awake()
+    void Awake()
     {
-        #if UNITY_IOS
-                gameId = iosGameId;
-        #elif UNITY_ANDROID
-                gameId = androidGameId;
-        #elif UNITY_EDITOR
-                gameId= androidGameId; // If you Havn't Switched the Platfrom...
-        #endif
+        InitializeAds();
+    }
 
+    public void InitializeAds()
+    {
+#if UNITY_IOS
+            _gameId = _iOSGameId;
+#elif UNITY_ANDROID
+        _gameId = _androidGameId;
+#elif UNITY_EDITOR
+            _gameId = _androidGameId; //Only for testing the functionality in the Editor
+#endif
         if (!Advertisement.isInitialized && Advertisement.isSupported)
         {
-            Advertisement.Initialize(gameId, isTesting, this);
+            Advertisement.Initialize(_gameId, _testMode, this);
         }
     }
 
 
     public void OnInitializationComplete()
     {
-        Debug.Log("Ads Initialized...");
-        AdsManager.Instance.UpdateDebug("Ads Initialized");
-        AdsManager.Instance.LoadAllAds();
+        Debug.Log("Unity Ads initialization complete.");
+        AdsManager.Instance.LoadAds();
     }
 
-    public void OnInitializationFailed(UnityAdsInitializationError error, string message)    
+    public void OnInitializationFailed(UnityAdsInitializationError error, string message)
     {
-        Debug.LogWarning("Initialization failed.");
-        AdsManager.Instance.UpdateDebug("Initialization Failed");
+        Debug.Log($"Unity Ads Initialization Failed: {error.ToString()} - {message}");
     }
 }

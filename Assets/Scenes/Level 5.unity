@@ -3566,7 +3566,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 661091580}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ddb0a82744816894d8d219b83e9c2f8e, type: 3}
+  m_Script: {fileID: 11500000, guid: 64eb5a233666cd54494a89921ce6801d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &666538821
@@ -5617,7 +5617,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 948966359}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ddb0a82744816894d8d219b83e9c2f8e, type: 3}
+  m_Script: {fileID: 11500000, guid: 64eb5a233666cd54494a89921ce6801d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &966376351
@@ -5849,10 +5849,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 966376351}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60b1716142fe9e440b9ca8caf53885b4, type: 3}
+  m_Script: {fileID: 11500000, guid: e37fd8d2ace27db40a6db2bbe0fb761b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isShopAd: 0
+  RewardType: 0
 --- !u!1 &983136193
 GameObject:
   m_ObjectHideFlags: 0

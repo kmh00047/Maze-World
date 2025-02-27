@@ -5856,6 +5856,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 8995660793727235648, guid: 05dcec316ba2ba24eabae283b2bbbee1, type: 3}
+      propertyPath: _testMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8995660793727235648, guid: 05dcec316ba2ba24eabae283b2bbbee1, type: 3}
       propertyPath: iosGameId
       value: 5797909
       objectReference: {fileID: 0}
@@ -5867,17 +5871,25 @@ PrefabInstance:
       propertyPath: DebugAd
       value: 
       objectReference: {fileID: 1180541793}
+    - target: {fileID: 8995660793727235649, guid: 05dcec316ba2ba24eabae283b2bbbee1, type: 3}
+      propertyPath: rewardedAds
+      value: 
+      objectReference: {fileID: 1783886089}
+    - target: {fileID: 8995660793727235649, guid: 05dcec316ba2ba24eabae283b2bbbee1, type: 3}
+      propertyPath: interstitialAds
+      value: 
+      objectReference: {fileID: 1783886090}
     - target: {fileID: 8995660793727235650, guid: 05dcec316ba2ba24eabae283b2bbbee1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.5143287
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8995660793727235650, guid: 05dcec316ba2ba24eabae283b2bbbee1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.48247233
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8995660793727235650, guid: 05dcec316ba2ba24eabae283b2bbbee1, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.1874425
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8995660793727235650, guid: 05dcec316ba2ba24eabae283b2bbbee1, type: 3}
       propertyPath: m_LocalRotation.w
@@ -9684,7 +9696,7 @@ RectTransform:
   m_GameObject: {fileID: 1240546244}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.9693239, y: 1.9693239, z: 1.9693239}
+  m_LocalScale: {x: 1.8184539, y: 1.8184539, z: 1.8184539}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1388515426}
@@ -9693,7 +9705,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 602.2, y: 150}
+  m_AnchoredPosition: {x: 601.29, y: 147.56}
   m_SizeDelta: {x: 180, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1240546246
@@ -9787,10 +9799,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1240546244}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60b1716142fe9e440b9ca8caf53885b4, type: 3}
+  m_Script: {fileID: 11500000, guid: e37fd8d2ace27db40a6db2bbe0fb761b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isShopAd: 1
+  RewardType: 1
 --- !u!1 &1254107307
 GameObject:
   m_ObjectHideFlags: 0
@@ -11027,7 +11039,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Watch Ad\n \n \n\n\n\n\n300
+  m_text: Watch Ad\n \n \n\n\n\n\n200
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9c063a5e5efd39e449c97c4f9665137c, type: 2}
   m_sharedMaterial: {fileID: -98915159255955147, guid: 9c063a5e5efd39e449c97c4f9665137c, type: 2}
@@ -14171,6 +14183,28 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1780488025}
   m_CullTransparentMesh: 1
+--- !u!114 &1783886089 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1822419796870735347, guid: 05dcec316ba2ba24eabae283b2bbbee1, type: 3}
+  m_PrefabInstance: {fileID: 684337835}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 055a016345cda3444a4e2eebf2491d14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1783886090 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6308695399926809214, guid: 05dcec316ba2ba24eabae283b2bbbee1, type: 3}
+  m_PrefabInstance: {fileID: 684337835}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d27df3a92822e8a40a18d90fd6fa2fc6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1800150856
 GameObject:
   m_ObjectHideFlags: 0

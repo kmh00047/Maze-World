@@ -82,22 +82,33 @@ public class Movement : MonoBehaviour
     private void Update()
     {
         float moveDirection = moveInput.x;
+        float velocityX = rb.linearVelocity.x;
 
         if (moveDirection != 0)
         {
+            // Apply force for movement
             rb.AddForce(new Vector2(moveDirection * speed * 120 * Time.deltaTime, 0));
+
+            // Increase deceleration when changing direction
+            if (Mathf.Sign(velocityX) != Mathf.Sign(moveDirection))
+            {
+                velocityX -= 2 * deceleration * Time.deltaTime * Mathf.Sign(velocityX);
+                rb.linearVelocity = new Vector2(velocityX, rb.linearVelocity.y);
+            }
         }
 
-        // Deceleration
+        // Natural Deceleration when no input
         if (moveDirection == 0 && isGrounded)
         {
-            if (rb.linearVelocity.x < -(maxSpeed / 7))
-                rb.linearVelocity += new Vector2(deceleration * Time.deltaTime, 0);
-            else if (rb.linearVelocity.x > (maxSpeed / 7))
-                rb.linearVelocity -= new Vector2(deceleration * Time.deltaTime, 0);
+            if (Mathf.Abs(velocityX) > (maxSpeed / 7))
+            {
+                float decelAmount = deceleration * Time.deltaTime * Mathf.Sign(velocityX);
+                velocityX -= decelAmount;
+                rb.linearVelocity = new Vector2(velocityX, rb.linearVelocity.y);
+            }
         }
-
     }
+
 
     private void LateUpdate()
     {
