@@ -32,27 +32,25 @@ public class AdsManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (scene.name == menuSceneName)
-        {
-            StartCoroutine(ShowBannerWithDelay());
-        }
-        else
-        {
-            bannerAds.HideBannerAd();
-        }
-
+       
     }
 
     public void LoadAds()
     {
         interstitialAds.LoadAd();
         rewardedAds.LoadAd();
+        UpdateDebug("Banner load called");
         bannerAds.LoadBanner();
+    }
+
+    public void ShowBannerAd()
+    {
+        StartCoroutine(ShowBannerWithDelay());
     }
 
     IEnumerator ShowBannerWithDelay()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
         bannerAds.ShowBannerAd();
     }
 

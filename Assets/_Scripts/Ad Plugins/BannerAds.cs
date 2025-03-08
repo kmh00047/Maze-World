@@ -8,7 +8,8 @@ public class BannerAds : MonoBehaviour
     [SerializeField] string _iOSAdUnitId = "Banner_iOS";
     string _adUnitId = null;
 
-    void Start()
+
+    void Awake()
     {
 #if UNITY_IOS
         _adUnitId = _iOSAdUnitId;
@@ -20,21 +21,32 @@ public class BannerAds : MonoBehaviour
 
     public void LoadBanner()
     {
+        AdsManager.Instance.UpdateDebug("Load Banner");
         BannerLoadOptions options = new BannerLoadOptions
         {
             loadCallback = OnBannerLoaded,
             errorCallback = OnBannerError
         };
-
-        Advertisement.Banner.Load(_adUnitId, options);
+        AdsManager.Instance.UpdateDebug("Loaded CallBacks");
+        Advertisement.Banner.Load(_androidAdUnitId, options);
     }
 
-    void OnBannerLoaded() => Debug.Log("Banner loaded");
+    void OnBannerLoaded() 
+    { 
+        Debug.Log("Banner loaded");
+        AdsManager.Instance.UpdateDebug("Banner loaded");
+        AdsManager.Instance.ShowBannerAd();
+    }
 
-    void OnBannerError(string message) => Debug.Log($"Banner Error: {message}");
+    void OnBannerError(string message)
+    {
+        Debug.Log($"Banner Error: {message}");
+        AdsManager.Instance.UpdateDebug("Error: " + message);
+    }
 
     public void ShowBannerAd()
     {
+        AdsManager.Instance.UpdateDebug("Show Banner called");
         BannerOptions options = new BannerOptions
         {
             clickCallback = OnBannerClicked,
@@ -43,6 +55,7 @@ public class BannerAds : MonoBehaviour
         };
 
         Advertisement.Banner.Show(_adUnitId, options);
+        AdsManager.Instance.UpdateDebug("Banner ad shown");
     }
 
     public void HideBannerAd() => Advertisement.Banner.Hide();
