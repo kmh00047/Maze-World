@@ -32,7 +32,15 @@ public class AdsManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-       
+       if(scene.name == menuSceneName)
+       {
+            bannerAds.ShowBannerAd();
+       }
+        else
+        {
+            bannerAds.HideBannerAd();
+        }
+
     }
 
     public void LoadAds()

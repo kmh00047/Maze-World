@@ -20,13 +20,16 @@ public class MovingPlatforms : MonoBehaviour
     private Vector3 startPosition;
     private GameObject newBall = null;
     private GameObject player = null;
+    Movement movement;
 
     private PlatformPrefab platformPrefab;
+    private bool newBallExpanded = false;
     private void Start()
     {
         startPosition = transform.position;
 
         platformPrefab = GetComponent<PlatformPrefab>();
+        movement = FindAnyObjectByType<Movement>();
     }
 
     private void Update()
@@ -51,6 +54,8 @@ public class MovingPlatforms : MonoBehaviour
         {
             newBall.transform.position = player.transform.position;
         }
+
+        
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -63,9 +68,25 @@ public class MovingPlatforms : MonoBehaviour
             
 
             newBall = Instantiate(toBeInstantiated, player.transform.position, player.transform.rotation);
-            newBall.transform.localScale = new Vector3(newBall.transform.localScale.x/2.55f, newBall.transform.localScale.y / 2.55f, 1); 
+            newBall.transform.localScale = new Vector3(newBall.transform.localScale.x/2.55f, newBall.transform.localScale.y / 2.55f, 1);
 
-            if(gameObject.activeSelf)player.transform.SetParent(transform);
+            if ((player != null) && (newBall != null) && (movement != null))
+            {
+                if (movement.isJumping && !newBallExpanded)
+                {
+                    newBall.transform.localScale *= 3.2f;
+                    newBallExpanded = true;
+                    Debug.Log("ball scale increased");
+                }
+
+                if (!movement.isJumping && newBallExpanded)
+                {
+                    newBallExpanded = false;
+                    Debug.Log("ball scale decreased");
+                }
+            }
+
+            if (gameObject.activeSelf)player.transform.SetParent(transform);
 
             Debug.Log("Player landed on the platform.");
         }

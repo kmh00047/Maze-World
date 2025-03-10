@@ -21,6 +21,9 @@ public class BannerAds : MonoBehaviour
 
     public void LoadBanner()
     {
+        // Some bug, to be fixed in later updates
+        return;
+
         AdsManager.Instance.UpdateDebug("Load Banner");
         BannerLoadOptions options = new BannerLoadOptions
         {
@@ -46,6 +49,9 @@ public class BannerAds : MonoBehaviour
 
     public void ShowBannerAd()
     {
+        // Some bug, to be fixed in later updates
+        return;
+
         AdsManager.Instance.UpdateDebug("Show Banner called");
         BannerOptions options = new BannerOptions
         {
@@ -58,7 +64,14 @@ public class BannerAds : MonoBehaviour
         AdsManager.Instance.UpdateDebug("Banner ad shown");
     }
 
-    public void HideBannerAd() => Advertisement.Banner.Hide();
+    public void HideBannerAd() 
+    {
+        // Some bug, to be fixed in later updates
+        return;
+
+
+        Advertisement.Banner.Hide(); 
+    }
 
     void OnBannerClicked() => Debug.Log("Banner clicked");
     void OnBannerShown() => Debug.Log("Banner shown");

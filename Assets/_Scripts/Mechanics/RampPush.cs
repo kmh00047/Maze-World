@@ -56,16 +56,19 @@ public class RampPush : MonoBehaviour
         if (collision.gameObject.transform == Player)
         {
             Debug.Log("Player collided with the Ramp.");
-            // Apply force to the player to make it bounce
-            Vector2 bounceForce = new Vector2(0, force);
-
-            // Using Impulse to instantly add all the force
-            playerRb.AddForce(bounceForce, ForceMode2D.Impulse);
-            if (audioManager != null)
+            if (collision.gameObject.transform.localScale.x <= 0.38f)
             {
-                audioManager.PlayRampJumpAudio();
+                // Apply force to the player to make it bounce
+                Vector2 bounceForce = new Vector2(0, force);
+
+                // Using Impulse to instantly add all the force
+                playerRb.AddForce(bounceForce, ForceMode2D.Impulse);
+                if (audioManager != null)
+                {
+                    audioManager.PlayRampJumpAudio();
+                }
+                Debug.Log("Player velocity after force = " + playerRb.linearVelocity);
             }
-            Debug.Log("Player velocity after force = " + playerRb.linearVelocity);
         }
     }
 

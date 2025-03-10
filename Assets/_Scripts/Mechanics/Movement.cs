@@ -19,6 +19,7 @@ public class Movement : MonoBehaviour
     public Animator animator;
     public LayerMask groundMask;
 
+    public bool isJumping;
     private Rigidbody2D rb;
     private bool isGrounded = true;
     private Vector2 moveInput;
@@ -60,6 +61,7 @@ public class Movement : MonoBehaviour
     {
         if (isGrounded)
         {
+            isJumping = true;
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0);
             rb.AddForce(jumpForce * 0.2f * Vector2.up, ForceMode2D.Impulse);
             if (AudioManager.instance != null)
@@ -71,6 +73,7 @@ public class Movement : MonoBehaviour
 
     private void OnJumpRelease(InputAction.CallbackContext context)
     {
+        isJumping = false;
         animator.Play("Scale Down");
     }
 
