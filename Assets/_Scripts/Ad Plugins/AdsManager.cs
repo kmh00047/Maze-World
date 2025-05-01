@@ -7,14 +7,12 @@ using UnityEngine.SceneManagement;
 public class AdsManager : MonoBehaviour
 {
     public AdsInitializer initializeAds;
-    public BannerAds bannerAds;
     public InterstitialAds interstitialAds;
     public RewardedAds rewardedAds;
 
     public TextMeshProUGUI DebugAd;
 
     public static AdsManager Instance { get; private set; }
-    private string menuSceneName = "Menu";
 
 
     private void Awake()
@@ -32,14 +30,14 @@ public class AdsManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-       if(scene.name == menuSceneName)
-       {
-            bannerAds.ShowBannerAd();
-       }
-        else
-        {
-            bannerAds.HideBannerAd();
-        }
+       //if(scene.name == menuSceneName)
+       //{
+       //     bannerAds.ShowBannerAd();
+       //}
+       // else
+       // {
+       //     bannerAds.HideBannerAd();
+       // }
 
     }
 
@@ -47,19 +45,6 @@ public class AdsManager : MonoBehaviour
     {
         interstitialAds.LoadAd();
         rewardedAds.LoadAd();
-        UpdateDebug("Banner load called");
-        bannerAds.LoadBanner();
-    }
-
-    public void ShowBannerAd()
-    {
-        StartCoroutine(ShowBannerWithDelay());
-    }
-
-    IEnumerator ShowBannerWithDelay()
-    {
-        yield return new WaitForSeconds(1f);
-        bannerAds.ShowBannerAd();
     }
 
     public void UpdateDebug(string message)
