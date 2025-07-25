@@ -56,8 +56,8 @@ If you like this game:
 ---
 
 ### 🔗 Links  
-[🎮 Play on Play Store](https://play.google.com/store/apps/details?id=com.ScavDev.MazeWorld) |  
-[🌐 Web Demo](https://kmhassaan.itch.io/maze-world) |  
+[🎮 Play on Play Store](https://play.google.com/store/apps/details?id=com.ScavDev.MazeWorld)
+[🌐 Web Demo](https://kmhassaan.itch.io/maze-world)
 [💻 Windows Build](https://kmhassaan.itch.io/maze-world)  
 
 ---
