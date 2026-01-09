@@ -1,6 +1,7 @@
 # 🌍 Maze World  
 *A unique maze-solving & parkour adventure game!* 
-
+> Note: This is the earliest version of the game. The game on Play Store is a much
+> newer version of this and is significantly advanced in development work.
 ---
 
 ## ✨ About the Game  
